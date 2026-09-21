@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi bebé y yo · Mami a mil Store</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+  :root{
+    --bg: #FAF6EE;
+    --ink: #3B4468;
+    --blue: #8CA1DA;
+    --blue-dark: #5E6FA3;
+    --blue-pale: #EEF1FA;
+    --beige: #EFE3D0;
+    --beige-line: #E4D6BF;
+    --muted: #8189A8;
+    --line: #E3DCCB;
+    --card: #FFFFFF;
+    --alert: #C4472E;
+    --alert-bg: #FBEAE5;
+    --green: #6E9C7D;
+    --green-bg: #E9F2EC;
+  }
+
+  *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  img{ max-width: 100%; }
+
+  .app{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+  }
+
+  /* ---------- Header / marca ---------- */
+  .top-header{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    padding: 16px 20px calc(14px + env(safe-area-inset-top,0px));
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 30;
+  }
+  .top-header img{
+    width: 40px; height:40px;
+    border-radius: 12px;
+    flex-shrink:0;
+  }
+  .top-header .brandname{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size: 17px;
+    color: var(--blue-dark);
+    line-height:1.1;
+  }
+  .top-header .tagline{
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .top-header .edit-profile-btn{
+    margin-left:auto;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight:700;
+    color: var(--blue-dark);
+    background: var(--blue-pale);
+    border:none;
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor:pointer;
+  }
+
+  /* ---------- Tabs ---------- */
+  .tabbar{
+    display:flex;
+    overflow-x:auto;
+    gap: 6px;
+    padding: 10px 14px;
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 72px;
+    z-index: 29;
+    scrollbar-width: none;
+  }
+  .tabbar::-webkit-scrollbar{ display:none; }
+  .tab-btn{
+    flex-shrink:0;
+    font-family:'Inter', sans-serif;
+    font-size: 13px;
+    font-weight:600;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 9px 14px;
+    border-radius: 999px;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .tab-btn.active{
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: #fff;
+  }
+
+  .screen{ display:none; padding: 20px 20px 20px; }
+  .screen.active{ display:block; }
+
+  .section-title{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 21px;
+    color: var(--blue-dark);
+    margin: 0 0 4px;
+  }
+  .section-sub{
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+
+  .card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+
+  .btn-outline, .btn-solid, .btn-ghost{
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 11px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .btn-outline{
+    background: transparent;
+    border: 1.5px solid var(--blue-dark);
+    color: var(--blue-dark);
+  }
+  .btn-outline:hover{ background: var(--blue-pale); }
+  .btn-solid{
+    background: var(--blue-dark);
+    color: #fff;
+  }
+  .btn-solid:hover{ background: var(--blue); }
+  .btn-ghost{
+    background: var(--beige);
+    color: var(--blue-dark);
+  }
+  .btn-outline:focus-visible, .btn-solid:focus-visible, .btn-ghost:focus-visible{
+    outline: 2px solid var(--blue-dark);
+    outline-offset: 2px;
+  }
+  .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
+
+  label{ display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
+  input[type="text"], input[type="date"], input[type="number"], textarea, select{
+    width:100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-family:'Inter', sans-serif;
+    font-size: 14.5px;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  input:focus, textarea:focus, select:focus{ outline:none; border-color: var(--blue-dark); }
+  textarea{ resize: vertical; min-height: 70px; }
+  .field{ margin-bottom: 16px; }
+
+  .chip-select{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip-option{
+    font-size: 12.5px;
+    font-weight:600;
+    padding: 8px 13px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    color: var(--muted);
+    cursor:pointer;
+    user-select:none;
+  }
+  .chip-option.selected{
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: #fff;
+  }
+
+  .badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding: 4px 10px;
+    border-radius:999px;
+    display:inline-block;
+  }
+  .badge-blue{ background: var(--blue-pale); color: var(--blue-dark); }
+  .badge-green{ background: var(--green-bg); color: var(--green); }
+  .badge-alert{ background: var(--alert-bg); color: var(--alert); }
+
+  .empty-state{
+    text-align:center;
+    padding: 30px 16px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .disclaimer-box{
+    background: var(--ink);
+    color: var(--beige);
+    border-radius: 16px;
+    padding: 18px 20px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  .disclaimer-box b{ color: #fff; }
+
+  @media print{
+    .top-header .edit-profile-btn, .tabbar, .btn-row, .no-print{ display:none !important; }
+    .screen{ display:block !important; padding: 0; }
+    body{ background:#fff; }
+    .card{ break-inside: avoid; }
+  }
+
+  /* ---------- Onboarding ---------- */
+  .onboarding-overlay{
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 100;
+    overflow-y: auto;
+    padding: 30px 18px 60px;
+  }
+  .onboarding-card{
+    max-width: 480px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px 24px;
+  }
+  .onb-logo-wrap{
+    display:flex;
+    justify-content:center;
+    margin-bottom: 18px;
+  }
+  .onb-logo-wrap img{
+    width: 84px; height:84px;
+    border-radius: 22px;
+    box-shadow: 0 8px 20px rgba(140,161,218,0.35);
+  }
+  .hint-text{
+    font-size: 12px;
+    color: var(--muted);
+    margin: 6px 0 0;
+    line-height:1.4;
+  }
+  .foto-preview{ margin-top: 8px; }
+  .foto-preview img{
+    width: 70px; height:70px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+  }
+
+  /* ---------- Inicio / dashboard ---------- */
+  .hero-card{
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    color: #fff;
+    border-radius: 20px;
+    padding: 24px 24px;
+    margin-bottom: 18px;
+  }
+  .hero-top{ display:flex; align-items:center; gap:14px; margin-bottom: 14px; }
+  .hero-photo{
+    width: 56px; height:56px;
+    border-radius: 16px;
+    object-fit: cover;
+    background: rgba(255,255,255,0.25);
+    flex-shrink:0;
+  }
+  .hero-name{ font-family:'Baloo 2', sans-serif; font-weight:700; font-size:22px; }
+  .hero-age{ font-family:'JetBrains Mono', monospace; font-size:12.5px; opacity:0.9; }
+  .hero-stage{
+    display:inline-block;
+    background: rgba(255,255,255,0.2);
+    font-size: 11.5px;
+    font-weight:600;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-top: 6px;
+  }
+  .hero-msg{
+    font-size: 13px;
+    line-height:1.5;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top:14px;
+  }
+
+  .progress-row{ display:flex; align-items:center; gap:10px; margin-bottom: 6px; }
+  .progress-bar-bg{
+    flex:1; height:8px; background: var(--line); border-radius:999px; overflow:hidden;
+  }
+  .progress-bar-fill{
+    height:100%; background: var(--blue-dark); border-radius:999px; transition: width .3s ease;
+  }
+  .progress-label{
+    font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:700; color: var(--blue-dark); white-space:nowrap;
+  }
+
+  .mini-game-card{
+    display:flex; align-items:flex-start; gap:12px;
+    padding: 12px 4px; border-bottom: 1px solid var(--line);
+  }
+  .mini-game-card:last-child{ border-bottom:none; }
+  .mini-game-icon{ width:30px; height:30px; color:var(--blue-dark); flex-shrink:0; }
+  .mini-game-icon svg{ width:100%; height:100%; }
+  .mini-game-title{ font-weight:700; font-size:14px; margin:0 0 2px; }
+  .mini-game-area{ font-family:'JetBrains Mono', monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+
+  .quick-link-card{
+    display:flex; align-items:center; justify-content:space-between;
+    background: var(--beige); border-radius:14px; padding:16px 18px; margin-bottom:14px; cursor:pointer;
+  }
+  .quick-link-card b{ font-family:'Baloo 2', sans-serif; font-size:15px; color:var(--ink); }
+  .quick-link-card span{ font-size:12px; color:var(--muted); }
+
+  /* ---------- Filtros ---------- */
+  .filters-panel{
+    background: var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin-bottom:16px;
+  }
+  .filter-group{ margin-bottom:12px; }
+  .filter-group:last-child{ margin-bottom:0; }
+  .filter-group-label{ font-family:'JetBrains Mono', monospace; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:8px; display:block; }
+
+  /* ---------- Tarjeta de actividad completa ---------- */
+  .activity-full-card{
+    background: var(--card); border:1px solid var(--line); border-radius:18px; padding:22px 22px; margin-bottom:16px;
+  }
+  .activity-full-card .top-row{ display:flex; align-items:flex-start; gap:12px; margin-bottom:10px; }
+  .activity-full-card .icon-wrap{ width:38px; height:38px; color:var(--blue-dark); flex-shrink:0; }
+  .activity-full-card .icon-wrap svg{ width:100%; height:100%; }
+  .activity-full-card h3{ font-family:'Baloo 2', sans-serif; font-size:19px; margin:0 0 3px; }
+  .activity-full-card .meta-tags{ display:flex; flex-wrap:wrap; gap:6px; margin: 8px 0 12px; }
+  .activity-full-card .field-label{ font-family:'JetBrains Mono', monospace; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--blue-dark); margin: 12px 0 4px; }
+  .activity-full-card p, .activity-full-card ol, .activity-full-card ul{ font-size:14px; line-height:1.55; margin:0; }
+  .activity-full-card ol, .activity-full-card ul{ padding-left:20px; }
+  .activity-full-card .chips-row{ display:flex; flex-wrap:wrap; gap:6px; }
+  .safety-note{ background: var(--alert-bg); color:var(--alert); border-radius:10px; padding:10px 12px; font-size:13px; margin-top:12px; line-height:1.4; }
+  .activity-full-card .action-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+  .action-toggle{
+    font-size:12.5px; font-weight:600; padding:9px 14px; border-radius:999px; border:1.5px solid var(--line); background:var(--bg); color:var(--muted); cursor:pointer;
+  }
+  .action-toggle.on{ background: var(--green-bg); border-color: var(--green); color: var(--green); }
+  .action-toggle.saved{ background: var(--blue-pale); border-color: var(--blue-dark); color: var(--blue-dark); }
+
+  /* ---------- Hitos con estados ---------- */
+  .hito-item{
+    border: 1px solid var(--line); border-radius:14px; padding:16px 18px; margin-bottom:12px; background:var(--card);
+  }
+  .hito-texto{ font-size:14.5px; font-weight:600; margin:0 0 4px; }
+  .hito-ejemplo{ font-size:12.5px; color:var(--muted); margin:0 0 12px; font-style:italic; }
+  .estado-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+  .estado-btn{
+    font-size:11.5px; font-weight:600; padding:7px 11px; border-radius:999px; border:1.5px solid var(--line); background:var(--bg); color:var(--muted); cursor:pointer;
+  }
+  .estado-btn.sel-pendiente{ background:#EDEDED; border-color:#B9B9B9; color:#666; }
+  .estado-btn.sel-comenzando{ background:#FFF3D6; border-color:#E8A33D; color:#9C6B12; }
+  .estado-btn.sel-frecuente{ background: var(--green-bg); border-color:var(--green); color:var(--green); }
+  .estado-btn.sel-comentar{ background: var(--alert-bg); border-color:var(--alert); color:var(--alert); }
+  .hito-extra{ margin-top:10px; }
+  .hito-extra input, .hito-extra textarea{ font-size:13px; padding:9px 12px; }
+  .area-progress-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .area-progress-label{ width:150px; font-size:12.5px; font-weight:600; flex-shrink:0; }
+
+  /* ---------- Logros ---------- */
+  .logro-card{
+    background: var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:14px; display:flex; gap:14px;
+  }
+  .logro-photo{ width:56px; height:56px; border-radius:12px; object-fit:cover; background:var(--beige); flex-shrink:0; }
+  .logro-info b{ font-family:'Baloo 2', sans-serif; font-size:15px; display:block; }
+  .logro-info .logro-fecha{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--muted); }
+  .logro-info p{ font-size:13px; margin: 6px 0 8px; }
+
+  #logro-canvas-wrap{ display:none; }
+</style>
+</head>
+<body>
+
+<!-- ============ MODAL: CREAR / EDITAR PERFIL ============ -->
+<div id="onboarding" class="onboarding-overlay">
+  <div class="onboarding-card">
+    <div class="onb-logo-wrap">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAIAAABEtEjdAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFDmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTExLTEwPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjcwMTcyZGY0LWI5ZTItNGFkYS04OTUxLTVkMTYyNTY5M2VjYzwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5Mb2dvIFRpZW5kYSBkZSByb3BhIHBhcmEgYmViw6lzIG9zbyBDcmVhdGl2byBBenVsIC0gMTwvcmRmOmxpPgogICA8L3JkZjpBbHQ+CiAgPC9kYzp0aXRsZT4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6cGRmPSdodHRwOi8vbnMuYWRvYmUuY29tL3BkZi8xLjMvJz4KICA8cGRmOkF1dGhvcj5LYXJlbiBNb3JhIFN0ZWluPC9wZGY6QXV0aG9yPgogPC9yZGY6RGVzY3JpcHRpb24+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczp4bXA9J2h0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8nPgogIDx4bXA6Q3JlYXRvclRvb2w+Q2FudmEgKFJlbmRlcmVyKSBkb2M9REFHM0h5cTdIX2cgdXNlcj1VQUNUTVVPUElMRSBicmFuZD1DUHJvIElJIHRlbXBsYXRlPUxvZ28gVGllbmRhIGRlIHJvcGEgcGFyYSBiZWLDqXMgb3NvIENyZWF0aXZvIEF6dWw8L3htcDpDcmVhdG9yVG9vbD4KIDwvcmRmOkRlc2NyaXB0aW9uPgo8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSdyJz8+e0lpZQAALptJREFUeJzs3elzW9d5x/FzsYMECBIECe7iKlEUta92bG2WFDvjxE7t2O2knWln+qr/SN7mZaedzqTT6Yxnmjq229SO4k3eJMsSLVuytYuiFu4LuGIH+gIxDdwLgJcURRKPvp9XFg2CV0fE7557znPO0X7zu2sKACCLZb0vAACw+gh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABCIcAcAgQh3ABDItt4X8LhUVTi6mj1Nte5qn8NbbnPYLPFE6ub9uav9szfvz6331a0at9Pa1eLpavY4HZZUMj0XTs6FEw9Hw3eHFuKJ1HpfHYB1IzDcK732w7sDPW0Vuq/bbZaetoqetopINPnld1MXr07FHjn+qryOQKWj1u902Cw2m2a3Wmw2zWa12G2a1aIlkul4IpVIpuOJdCKZSiTTkWhyeDI6PBGJRJOP8nPtNsvOLt+WTd7moLvQa27en/v6eujOw/lH+UEASpT2m99dW+9rWE17t1adPFBr5pXhaPJM3/ilG6FlvX99wFVX7Qr4HHXVrmC1y2bVVnSZaj6cGJuKDk9Ex0LRwbHI1GzM/PcG/c5fHm2s9NrNvHhyJvbWx4OjU9GVXSeAEiUq3H/xbH1Pu77DXtyFq1Pvnx8t/ppApWNTXfmm+rJN9WVO+2OZpQjNxQeGFvoH5weGFsJFO/VNte7XTjY5bMu4jHgi9c4nQ5IGowAsSU64v3aiqb2xfAXfWCjfO5s9m1s87Y3lHveaDl6NTkXvPJy/cnt6PKTvzjfVuv/2hZaVve3pcyN915f3mAKgdAkZcz95oHZlya6U2re1amY+cf67ycwffR77zi7f9k6ft2x9Gqe2yllb5TzU6x8aj1y6EbraP5uZGyh321470bTitz11KGizaue/n1q9KwWwcUkI965mz96tVY/yDsf31YxNRZ0Oy84uX1vDCm8Sq64+4KoP1J08GLzaP/PNzekdXT7How0KHd9fe380PDQeWa0rBLBhSRiW+adXOyrKJdyl1sBYKPpvb99d76sA8NiVfCbu76ki2c2rqXR2t3qv3Z0t/jK7zdLV4gn4HA/HwrcfUEwJOcrdthP7a2uqnINj4Q8ujEZjYpeDlHws7t5Sud6XUGJ62iqKh7u3zPbr51sWSy3PXZ78uG/MzDtbLdrJg8Gedm88nrr1YP7986MspMKGomnq1z9t9vscSqlApaPMbf39Bw/X+6Iel9LefqA+4PJXONb7KkrM5hZP8YLO7Z2+7CL6Q9v9nU0eM+984kDtrs0+h81S7rbt7PL97Om6R71WYFUF/a5Msme01ZeveKnKxlfa4b6pvmy9L6Ek1VQ5i/zfcpdV95Vj+2q0pT4C1T7Hjk5f9le6W72BymI/CFhjuhXdVqtmW86SkdJS2n+x5lrCfSWqfcUed6Zm48bX79myRD3SwV6/NbcTpGlqc4upLj+wNqq8Ob/5C5HkI24EspGVdrj7PCU/Z7AuqoqOZU3O5NkLYX9PlaVw791m1TY358nxWj89d2wgZblPpXPhxHpdyRoo7XB3O/UDCDDD5Sj27563fqDSa392d3Whb+lu9bry/VtUrNNCMCAv3W9pPC55wr+0w91mLe3rXy9F+uBKqXQ6nffre7qrCs3E9nb48n69fG13blh39QHX9k5fDTMNj197Y/m29grPMnsPuunTeDL/r7oMpf3ZW4gmnA6qZZYtmSr2Ox2O5u/OOO2WA9v8n14a13096Hduqss/+eF0PEGPVod3B57eUa2USqfVRxfHFje0wOqyaNprJ5ta68uUUpFo8q0zg3eHFkx+r65XI7tUt7R7vgsRsZMhj9VUvlH1RfOFByL3bq0qM9TS7Oj0FXoScDksVovYUrNs3jLbwV5/5r81TR3ZE1hupxImdbd5W38ok3M5rcf3m9ri+y+vdzAsUyJGJtmmfCUmDfUwJrkclkzndJHDZtlWdJtlZ9HxfTHqql3ZtzGrRav0mNpwH8tVV+3K/qNvOe1stz1BwzKl/cF7MBJe70soSfdHij3GxpOpAqPuSim1o8uXXU+2vdOXdyp1UUX5E5FxdsNsRGild1AU58gN6LmFZVS86J4jEwzLbFgDw2bH2rDowWi4+H4a6bRKFR6Ud9gsT+/0L/5xa5u3+I8zDuOINDiW088YnojILrNbR7rn9btDy9j7yJIb7qI77iUe7vPhxI17HDC0PN/dmXnEd+ht92V2faipdDbV5iz5M9bIr/FRJ+slNBs//eVIZhIoNBt/94vh9b4isS7fmr50I5Q55GBgaOGTPv0MfxG6cC/SiRGg5D94X30/yTJI82bmE18v/zymSCyVXRqvaWp/T9Wfzo3s3KyvgPzyyuQLuVvKPCE9d6VU37VQ37WQx22bjySKjGvhESWS6ffOjrx3dsTjti338Ug38y873Eu7566Uuj8SHjBdCIVPv15GN2fRldvTsdzRye2dvopye3drzpjMQiT57a1p3QfGvrH37vB57Fs2eXdvqWxvLF+VvaPnwiR7HpqmaiqdvR0VO7p8zUH3qkyzr2DgS7fCQ/a/VMn33JVSfz4/8o8vta33VZSAkcno5dvTZl6p+52PxlJXbs/sydpd2WbV/upYg27I5ca9uXRaRWKp7N568dWwtVXOQKXTatEWoonRyejscibHjOqqXV3NntmFxK37c3PhhM2qNQfLav1Om1WbW0j0Dy7MzP84ydnd6j28O5C9q2g6rW7enzt3eWJwRYdVlbmsR/bUNNa4Q3Oxzy5NDE+s0YlXq9uGJm1u8dQHXKNT0RsDc8lUusxlbakry8y0h2Zjdx7OR3+oMrRatAPb/Ad7q7LLEKPx1JXb019emZyZX8nVBv3OZ3cHKj32h2ORM31j5kui9YuYRE+oSgj38VDswtWpfY920t6T4E9nzQ4ExxMpm/XHj6LDbjn/3eTOTl/21mC6irR0WvVdn1JKJZIppX78Xmu+LVVr/c6neqtbG8p0G0hMzcau9s9evBYqUmtfSFtD+avHGzM/bqKn6rs7M/tyq/LTaTU4Fv7824kHI+GXjzYYD93N7HTW1ew5/93kRxdNbWGf7ReHGzL114FKR9Dv+pc/9D/W7HgcbWjSMzurn9kVyPz3tYHZSDTV21GRnZvxROru0MKHF8ZsFu2XxxqM+3I77Za93VXb2n2nz41837+8SaAyl/VXzzVllhEEKp1lLut/f7jCPdlFj8qICHel1PvnR1vqymqL7mT7hPvowtjKOqQZodn49/0z2zvzbzOglLr1YG50MqqUSuSWIOi2iLBZteP7a3dvrsy77qnK63h6R/X+nqoPvhq7dGN5cwPZ21JW+xyHdwd0L9A01Vjr/tVzTRPT0SJ7EWuayixHWla+uxzW1qwNqL1ltvqA697jqeZ6fG1ohqapA9t+LJfq3pSnXMpus3Q1e5pr3fFkushB8y6H5cVn6hLJ1LLKIlrry7MXiLHvdyEbejx0Wd786KHgE7Me0fWB2S8feTX8V99PFRqjTKfVF99OZP47nsh5UfawjMth/etTzXu25E+lRXab5aeHgl35tpkswrgNfV6apszsMn9gm7+jaRlHpRvXo5q8nuV6rG1ohtNuNXlQu8tpLZLsGRaL9vxTdUu+LJtuit5hszg29rzOepHTKKHZ+FtnBtf7Kjai2w/m//DxKrTM6FT0xr385/Ndvzc79MNjQSKZc4tdfFrXNPXqc4260slCNE09/1RwWdNuq1tXrmnq2N6ljyhZLVVex8Fe/6Fef/GcetxtaEYkloyu6qr9Mpd1cZDnsTLO7VMtUzL6B+f/4917q/ubV+puP5j/rw8eLPe7krlDK4vr+s70jccMzRuNpT7OGsEo9Pz0zM6AyVTKKHfbWuuX0Xde2QTmeCj2r2/1//aNW386NxLOPbchUOnsaSu2s8ISTN8YGmrcf/ezlmN7a47urfn7n28qcnLk425Dk0ZXtO3HtYHZ375x65/fvHPuyqTuEXB7R8WjlCqZvAcb5/aL76BX6oSMuS96OBr+9z8O/M2p5mU96Em1smRXhnHzxbHsyZnYxxfHTh4MLn6cwtHk/342lL3UXve9mqYppRw2y95u/VHm8+FE3/XQwNDCfCQZ8DnaG8t35Y4j97R5rw8UO8s7993ylEzMhxNvnH4wNRvb1l5x6mDQOLv7xbcTE9MxpdTX10PhSPLlow3Z/7ezyWN6zZc+JjRzkWO1aC/+pG5xqMFf4djeWXEm38KcNWhDpZSnzNbTVhFPpK7cnik0ITwfyfOQdG9k4e0zQ/F46ujemj2G60wk0x9+NRqJJiPR5McXx+xWbW9WBYTFonU2efqWvwIjw2RT+3364TjZJzALTMDJ6di1u7P7eyieUSueT0sbompR3/XQ+HRsz5bKcrdtdDJy9spk8c09MsMyvR0Vui1oxqaib340ODX7lxWtUzOxm/fnKsrt2SPdxY8D1NFtOZLx2TcTY6GoUuqbm9NBv0sXOtF46urdH7P72sDswNBC9gRdS53ZbnLCsJLd5MnLB3v9/ty/Zrkr/6dyDdqwtb7sF4cbMneanV2+Nz8azC4eXTRt2DYnlUqfPjeSqc85/eVIQ41LV0z1YDScXfV4pm98W0dFdnFkW2O5yXA3NrXdpkWK7XP6Fz/Z4dd9pfhJ8Xnt7a7a0eXTlHr/q9HHNGG+WkQNyywKcrqbUupR2iH346NLqXvDC2+dGfzP9+79+fzokts2ZTpVurrDZCr9zidDi6mU/fXsPwYqnSb3Haurdh3qzXNQVHaZ3Y37+pKM0GxcNz6g6+SWu20mh0F008jKXHCUuazZlScZNw3XmbEGbfjykYbFZ4i6av29cNG8oa58LBQbD/14Jf2D+v1edPtSxBKp/oc5ydgcdBc/Q2ZR0hDuZk5ka28sbzGcOjAWMnFPyHLiQO3Jg7VBv7PW73ztRFOhYww2CJnhXut3Lf2iJ8CK20H36XmkeUVNU0rV5Fap3h1cyHSodYyBaKbv7PPYXzne6DCMqE7PxbMnAO4Ozkdy5wOMZ04Zt6JrazA1Zm2ctzTzyH9oe7VuIPjOw/lC4b4Gbah7Mig0tjk9p++5T07npOTtB/pwTxtGt++P5jS1y2FtDpq6jwar9V0WM7v+PrMzz70/Fl/GgRDb2iuyF9PYrNqSu+atL4Hh7vPYi6+KfHKsuPBf1w817mdrnqaUpuk3/h0cz79Xc6VX/ykNLnV/0jT10pGGvDE0bRhS0KVSxDD3OzEd073G5LDs7s36Tq7x76JTVeHIXvSrMgPTF0bzvnhd2rBQ+bkx3ENzOeE+NqW/64QNTd0/qL+PmhxBajY8SxU/8F0ptb3D11CT585h/hDmap/j5MGg7osbfFdngSHIUqZFlV77yrZ20XVpTT4vZ+jKy6xWzeWw6t4g7+JJn8du7ILVB5YIpiN7ahoKvCYe1/cWF3JnAvMOi+u6wxWepeelXE6rcQ+1+oCr+LD7s7uqdS+4dCM0XmCgYO3b8OvroUIzscaCtFhuU0fjKV3RlLEppmZiuvKkJW+HSqmOpvJgtf5S2xuKDY/YrNpThtH2DJOnZVkt2s+frdd1GefDiUs3TW3msV4EhjsD7tnWvjV08112m5ZM6sc/PGV5PsbbO/LUHTbWuGsL/xV2bfYd6s3/uVX5poVTuaFkyXcEoK47ZmbAes+WSmN9usth3dxS8LG9u9Wrq7OMJ1JnLxdcaLbGbXjr/tzpL0cKfUskqh/NMDa17nLznra4gqbe252nUKK5rqxITB/bW1Po8cvM7UQpdfJgUDc/nEqn//j5sLEdNhSB4c6Ae7a1f47RfartNksskdKtMOo0LP6s9jn2G6YWVeY80t01eX/Qlk3eEwf0T8rZjA8cuiL9vD3rmdwxB4/bVvwYWH+F42CBG0xvvqhVSvk89lOGZ/zLt2eK7Aazlm04PBF5+5OhIjsmhqNJ3f81NnXURFPr9jhbstR9W3uFcUcgpZTVou0osDFGV7NnT777QUZjvrEane5W784u/Zt/8e3knYfLOCRkXQgMdyrcs3lXYxvbZdENZGfGhR6M5gwQ11W7DmTVqrbUlb12oqlQeUlHU/lPDLNh+7ZWvXS4XhcZyaV2G47EcrpaeRNnIbc7pmmqruiwxk8PBQtdeVtDuW5X5MwPffGZet0a+tBcfMlDJ9amDRciybfODC655Vk0tyXthjrUJYdllFK6YRljHXq2Mpf1ucJnYe/vqTKOvFd67c8/FSwypuh2WovvRdFY637h6TrdOzwcDX/xzUSR79ogBOag+UmSJ4HbufbhnvOJddotVot2tX9ma27MHdtX29XinZiOVnodm+rKio/qP7sr4K9wnP9ucjwUawq6n9pe3WrYLiqVSg+NR7IrF42Jo+tv5h0HmJrRz5K5HQV/o7Z3+IpsXKVp6oWn6yKx1N0fSgNtVu3low3GspAzfWO6djNamzb8n0+HzMwT6gbfjKNSun5/3oIW3cSs026xaFqhA3yP7qkpcvCL22l95VjD7z98uHjxlV776yeaynN3pY4l0rr1EL0dFR8X2CFuU33ZS4cbdPfLhUjynU+Hip0yvGFIDPcn5ugfM9b+IKS4YbatzGW9dX9+ei6e/QnXNNUcdBeqfosnUrp+97b2im3txTYD+PP50eZat8oKd5chlHVdxfzDMoYam0CV41a+db5Bv/O5A/q+ZCSWzP65Trvl9RNN1wZmr9+dVZo61OuvM8wH9l0PXe1fehHp2rShsUQ9r0TuQ5LxkHR9U+eb2NcNNGmaClY7h/LtXbqj07cjd2wknVbpdDp71iRQ6fyHF1sv356+/WC+ymv/yc7qcsMRj6fPjpw4UJN9tXu7K68PzBp/6Lb2ilOGZ7J0Wr13dthYLLQxCRyWWcGqM8HW/jlmzrDCxe20ptLp98+PmuzuXLs7+8bpB+b3CEqn1fvnR7++HtIdF2XsyY7nVsLkHeOeXUjoOtEdjXn2Vgz6na8cb9RVUIxMRt/9XD8PqWlqa6v35aMNLx9pMCb74Fj4g/P5yx911qYNTb5edws3Tk3rVi3lXew2YSgNyntkZk97xalD+omBb26GLlyd0n3R6bDs21r1+smmU4eCxmS/cHXqyp3pawM59Z12m+X1k01dzZ7Mb4vVom3Z5H31ucafP1tvTJLPvxkvoUObpfXcn5DjmM1blZ67cbFPEcbEzHSUbt6fO9M3dmTPElstXr41/X9fDKfT6u0zgy8d0T8UGyWT6ffOjVy+Na0M86VGA8ML8+HE4sf+doE5sfsj4ezNcpuD7l2bK7P3ctjTXXlsb42uX5xIpt/9Ynh4InLx2lTeog6j2YXEO58Omd++ag3a0KTYUoPyN+/N7drsW5xovZVvZdbDsXD2P4dSak931fWBucU94Bw2y7F9Nbu36NcQTM3EPvxqLJlKNwfLliz0zBgYXvjowphS6uzlia2tXmfuTtSvHG+MxFKxeNLttBaqHr54beqzUhhqX/T/AAAA///t3WlvXNd9gPFz586+k8NtuEsUtVmyLDmyFO9OYqtxGsd1AiRp0xboAhRF+rofIZ+gQFGgaYogTZHUTVzZSe06imXJtuTI2hdSlMR9H5IznH29fTEyTXFmSIqLSP75/KBXEuV7RZgPD+89i/6113+40fewlnwey5GS/xW2uRXs5N5S/8DJJ939seVvo5HNFY4+VjV/L6cLt2aKu3oNTSSHJ1P1AVvZ7VMSqfzpi6G5PbNmotl7w/HmOkfpEGzOTDTz1oejc4Mpj9PSOW/oF4nlFuyuk80ZA2NJt9Ocyxu3+qKVBsLFsybm/05Hs9vvsQS81gMd3q8crTvQ4SudQnP6Yqg4Mbx/NFHlsdQuNU8plsi9eWq40sT2Stb7c7hMLXWO+WujBseTC1alhqPZcDTrtJvjydy56zOVtjmq9dvm/3fMurav3euw6cEax5P7qr72VF3pngG5vPGrD0ZmolnDUH2jiZZ6x5LT1Ycnk2/+/v5b4nSmkMsbpbNuzLpms+qVZkZd6YksMjd0c5IWd6/L8kTJWsHtLF8wzl1/6LjHk/ndre7iEGY2njt1YXL5U3qzOaPWb5ubhDASSs2d46GUCkezl7rnlupouXwhnswPjCf+cHPmNx+NLZgQEk/mi8NJv8e6YPgZTeQ+vjr19pmxmXlv/2LJ/GM7vHNHSVzsCg+OL1zGGUvmbvZGL3WH7w3HK/1AMjGT3t3qmR9ETVP11fb2RldDwF72SdfN3tlTF+6/lzMM1T0Qi8RyrfWOss+alVJjU6lfnhoOlds/YEnr+jlcplze2NfuKT6NyeeNM5dC4ZIn0ZMz6Wt3Ild6ImUfo9//mHD6UOcD3ynNutZc52gPOmv9trKD6Pc/nej+/FtROlO4dmfWrGuNtfZKe0PeuDf769Oj83+qGwmlGmrsy1x7bBjq3PWp95f36GxT0X70k66Nvoe1FPBZ//Z1Dsv+QjSR+6df3l3BX/R7LHtaPbqu3bg3+7BvkEyaduxAdUPANjGT/qwrvPq1HiZNa21w1FXZTCYtlclPhjPDE+UX3wd81qP7qz1Oc89gbDWHzLU2OL/7cvPiM9zn9AzGfv3BSOnTFa/LfGRvVWeLe25hfSZXmApnrt+dvdhd8VirdbL8z+Ey7WxyFWeXX+mJLPM1bFlfPhh44ciyDuswDHXmcmj+WGFOsMZ+ZK9/x7wT+JLp/Ggo9VnXTOlGN0opk6a98GTN0f1Vi6++Dkez750f3/xT2suSFnevy/L339m50XexiUzPZv7lV70bfRdb0pf2VX31aN3iT7fzBeOTa9NnLy8xRd1p16u91mgit1UmWjxi33q+cclNuBKp/Hvnx7v6lphW5PdY3A7z9GwmUfJiv1Rjjf35I7WlU0KVUmNTqcu3I1d7Ilti1mNZ0l4/rut581tR6Va0WKYLt2biqdyJY/Wl8/yKhiaSv78wOTy59Pg3kconUqsaJsv21ocjkVjtUwfKj6PzeeP2QOx3F5beX1p9/qx/mdcdCaX+873B+mpbe9DldZmtFlMmV5icyQxNJFf2xGxTkRb30o38tzm+263Grd7o0Hjy2IHq1ganz20xaSqZLiRSufHp9KXu8MoO9kNZH1ycvD0QPbK3qrnO4XLoBUMlU/l4KjcwlrjUHZ5/0MeaG59Oj6/o4MBNTlrcadkCfEJWKZrIbcWXaVvRSCg1cnZ0o+9CDoHrfZbzs9v2EeWzAWxLAuMeijzcxGHZHnYaNQAZJMZ9678JWUN8NoDtSdozd8VY9UHEfQ211DuO7Klqrnc47bqmqWg8NzSR/PTGdKXXcXvbPE11jngyt4J1ZMAqCYz7VISc3ZfNFdZ1msG28uwTNc88Hpg/Va94pt3eNs//fTpRdsFUW9B5eI9/Mpwm7nj0BMa99HDebUvkBK8NsafN8+yhgFKqdyT+0ZWpsamU027e3ep+5lDAYdNfOVY3GU6vcsEnsLYEPnNPZQp8mRWVXXiNFTiy16+UGp9O/9fvhocmkrm8MRvPXrg18+apYcNQJpP2peVtA7k4p11vrHU0BOwPu221Wdfqq22LbIlq0rQqj7Wl3lHltT7UcefYugSO3JVSPYOxprqlT0cUr6fcPqtYgYDXqpTqH40v2EBmaCL50ZWQ22mJJh5YFfnEbv+J4/cPeKv12/7xL/YUf//jq1NnSvYq0DR1dF/VwV2++RtJDk0kL3WHb9ybLXs/Lx+rO7Knanw69dPfDLzwZO3ju7x2q37yzGjpx1d7rV8+WL279YtNblOZQnd/9OOrU+yFIJvMuN8Zir34ZPkTgbePSCzL29S1Uky6tdyAuuwe3wXDyOYKuq7pJs0wvlhKVrq5mNth/tYL9w/eyxeMaCKnmzS3w9xc52iuc3Q0ud75aKz0b5k0TdOUSdNef7Fxwe7E8+1udb/6TEPxZKhILJvKFNwO3eUwH+r0dba4T54ZXc2GX9jkZMY9FM6EY1l/uWMbt48tdGTM5hcKp70u874d3mt3Z5fz0O9qT+RqT+TE8frDe/yhSPpf3+or+2Gapv74uWBLvSNfMM5dm/6sa6a43VXAZ332UM2+HZ79O72pTKHSTuIBv7Wu2nZvOH7j3mw4lp16cIVHjd/6jWeDNotpYib93rnxua2AdzS6Xn6qrtpn/eZzwX9/p5/xu1QCn7kXdS+1e5x4xYMjsCbOXZ/O5w2bxfSnJ1q++Vyws8Vd9vzVh3Wo01/ckvDdT8bPXA7NbWQ4Fcm89eHIxe6wUurIXn9TbflnjLpJu3Yn8ov3h27cmx2eSC7YWvnFJ2ttFlM4mv35u4PzN3nvHYn//L3BWCLntOvPHAqs/l+BzUls3EvPV9xWxqZSQ7xVXjsDY4mTZ0bjyZxu0h7b6f32V5r+4bu7vv2VpoO7fKup/OO7vEqpoYnk1XJH3J36w0TxmOkndvtK/1QpZRjqw0vldxt2Ocw7gi6l1Pkb08mS/fSjiftnVO1u9fB+VSqZj2WUUtFE7trdyMGO8l8V4pU90ACr0dUfvTcc37fDs6vF3VLnsNv0zhZ3Z4v7hcM17/9hYsl9xkuZNK2hxq6U6qnwAC2XN+4MxQ52+BorjNwj8WylvYOaau26rimlekfiZb/9FKfJ2q0mv8ey4DBryCA27kqpT65Nb8+4T89meOC+HjK5wpWeyJWeiEnT2oLOfe2e/Tu9bqf5teeCmWzhYc/r8XksxVHzIk+9I7GcqnzseyZTccvPuQOJ/u6NJc6u8TjNxF0kyXGfjmTuDMZ2VZ5LINUn11gPub4KhtE7Eu8diX/WNfO9V1ocNv3pxwPrcRhbcci9kjMKPv87S26Smsqs9hBEbE6S466UOn0ptN3iPhlOXyv3ABfrYXw6ffl2+MsHA/OnqC9TJJotGIZJ03yVp3X5PRalVCzx0BNa5h7X/Phk33IOnIM8Yl+oFk3OpM/f2F7D2HfOjm30LUijaeoHX2/9y2+0HTtQXfqnyXRBKbXMo7TnKxjG2FRaKdXR4ir7AVazqaPJpZRawbvx4jJapVSlwU1b0Hlwl29v+xInl2LrEh53pdSZS6F4crtsnnX5Nme/rT3DUE67HqyxH97tt5gXfsm0NTiVUtPlThEoLj6y6BW/yq7fjSilWuudj+30lv7pK8fr7TbdMNSl7jK7ki0umc7fGYwppY4fqC4uYprP67K88VLTN55p2Efc5ZIf91zeePdc+TUgwiTT+Q8+m9zou5DpcndYKeX3WN54qbH4qEQpZbfqLz9V19HsUkpdKrcr5Gwsq5TyuS37d3jLDu0vdYeLo/JXn2545lBg7iTu+mrbd77adKDDq5Q6f73ilsKL++DiZDKdr/Zav3+ipXnebhxtDc7vvdJss5gyucLZy8yqEkv70U+6NvoeHoXXng/u31FmcCTJm6eG2Uxm/bz6dMPjnT6llGGoaCKXLxS8TktxuuGVnshvPy7zNMzjNP/Nt3YUN3UxDFUwjE+uTZ99cG8Zr8vyJy82BmvsSql8wYglcmZdc30+Peby7fC758aNkjeqxbWvE9PpH5/sW+Se2xtdrz0XdNrvbz+QTOeddt3rsiilsrnC22fHWOkmmP6113+40ffwKHT3xzpbPYtsm7fVnbkcunyb96jrqGcwFopkXA6zx2W2W3WHTTeZtNFQ6vTFyUqrCjLZQt9owuO02Cwmi9lkMmlDE8n+scT8j0lnC9fvzhYMw+eyOO263apbLSbDUAPjid9fmDxfYSP4Xc3uYI09nsyX/YlhTjia7R6IWi0mv8fqcpjdTrPNqufyxp2h+MkPRwfGE4v8XWx122XkrpRyO8x/9Vp7cRQjTM9g7M1Twxt9F9uFxWzyuc0mTYvEsulsxZnmK+B1WfweSzZXmJ7NpCvPYV8B3aRVeS1upyWTyU/MpIvvWiGb/Gfuc2LJ3C9/N7TRd7H2QuHMW6dHNvoutpFsrhAKZyZm0mtbdqXUbDw7MJYYDaXWtuxKqXzBCIUzfSPxkVDqUZb95afqHtm1sMA2irtSajSU+sX7ovo+OZP+j3cHGIhhM7BbH+jJ4T3+jubttcpkU9lecVdK3RuO/+x/B9Z8zLUhRkOpn/52gCUq2CQaAvYffL318B6/zWqq8du+erTOWNHqWqwJsS8YFzE4nvzZbwe+f6LFYdvCz997R+JvnhpmzI7No2800RZMnDhef+J4fSKVN+uapthycsNsl9kyC8RT+dv9sZZ65xadP/Ppjem3z46VnM+DMuxWU8BnNesmo1DmIKT143aafS5LtdfqsOm6yWQYj/TqHqfZ537UVzfrWjSR72x1F2cHKaXsNn1Xi9vjtGSyhdi2WUu4SWzJtK2JmWjm3072vfSl2mOPlVlTvmklUvn/+XCkb5RJbMtlt+kHd/kcNt1h0826ppu0gqHGplLd/dE13PK+rsrW2epua3AWFytlc4VkppBM51PpvNVimru6yaQVDGN8Kr3mV9/T5mmpd+gmzVAqV+Hqc//2rv7oWh0ib9a19qBrZ7MrGLCns4XZWDb74DPPhoC9+OvCrRlO9XuUttFUyEraGpyvPR90bYUh/L3h+Mkzo6VnL+BhFTfsbal3zsxm7gzFu/pmUyuaoLK3zbOrxV1XZZuazXT1Re8OxZbzoKw96Nzb7m2pdxSvfqtvdmXTY/a2ezpb3HVVtlA4c7N3dplL2NqDzn07vC31jlA4c284dqsvurKrF3c89jjNvSPxu0Px4veqplrHn7/aOvcxqUz+7TNjfaNxnh8+esRdKaXsVtPzh2uP7PVv9I1UFEvkTl2YvNm78Gx7rFLAZ+1ocu3f6Y0n80MTyZHJ5OhUKrPo+/bGGnuw1tFUa6+tst0dinf1RVe8n0/AZ+1odu/f4Yklc8MTqeVcvanWEayxN9U6aqusdwbjt/pmV7Y5QfHqu1rc+9o9sURuaDI5MpkaC6UyuYpXN+tafbU9WGNvqnPU+K13BmPX787OP7jVajH99Wvtuq7dvDerm7Qn91WFo9l//u97K7s9rBJx/0Jdle3rTzcUF4JvKp/emD57eWqRrzqsntdlDtY4gjX2+mqbzapnMvnSJxtWi6lQMCZm0hPT6dGp1OTMCqta7uqWxtr7jy+sFtPiVx+fTo+tw9WDAXt9wG41a5lsIZkuJDP5VDpvs5jsNr14A9lcYXz6/r89FC5z9Y5mV6Gg5p69/NkftXqcZuK+UYj7Qk/s9h0/GPBX3mL7Ueruj56+FCq74yDWm9tpdlh1m9WUzRWS6UIqnX+U3189TrPdptssW/jqXpf5jZeafvJ2/3rcIZZE3Mvb0+Z56rGqSqfOr7dc3rh2J3L+xnQ4+tCnNACbR7XPytBko2yBt4gbors/2t0fba5zHNrt293qsVke0WqvyZn0zd7o5dth3ppCAMq+gYj7YoYmkkMTyXfU2I5G1952z+5W9zqtexoNpbr7o139UYbqANYEj2UeTo3fGqxxNNbYgzX2hsDKX73Gk7nRqdRoKDUaSo1MpjikGMDaYuT+cELhTCicmTuBOuCzVnmtNX5rwGv1uS02q26zmKwWk9ViMutaOlvIfP4rnspNz2anI+lQODMTzW6fk/8AbAjivipTkcxUJHNncKPvAwAetO12hQSA7YC4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCBiDsACETcAUAg4g4AAhF3ABCIuAOAQMQdAAQi7gAgEHEHAIGIOwAIRNwBQCDiDgACEXcAEIi4A4BAxB0ABCLuACAQcQcAgYg7AAhE3AFAIOIOAAIRdwAQiLgDgEDEHQAEIu4AIBBxBwCB/h8EQcv8vDYfzgAAAABJRU5ErkJggg==" alt="Mami a mil Store">
+    </div>
+    <p class="section-title" style="text-align:center;">Conozcamos a tu bebé</p>
+    <p class="section-sub" style="text-align:center;">Con estos datos personalizamos toda la app para acompañar su desarrollo.</p>
+
+    <div class="field">
+      <label for="f-nombre">Nombre del bebé</label>
+      <input type="text" id="f-nombre" placeholder="Ej. Bastián">
+    </div>
+
+    <div class="field">
+      <label for="f-nacimiento">Fecha de nacimiento</label>
+      <input type="date" id="f-nacimiento">
+    </div>
+
+    <div class="field">
+      <label for="f-foto">Foto (opcional)</label>
+      <input type="file" id="f-foto" accept="image/*">
+      <div id="f-foto-preview" class="foto-preview"></div>
+    </div>
+
+    <div class="field">
+      <label for="f-semanas">Semanas de gestación al nacer</label>
+      <input type="number" id="f-semanas" min="22" max="42" value="40">
+      <p class="hint-text">Si nació antes de la semana 37, calculamos también su edad corregida.</p>
+    </div>
+
+    <div class="field" id="f-fpp-wrap" style="display:none;">
+      <label for="f-fpp">Fecha probable de parto (la que te dio tu médico originalmente)</label>
+      <input type="date" id="f-fpp">
+    </div>
+
+    <div class="field">
+      <label>¿Qué le encanta a tu bebé? (elige las que apliquen)</label>
+      <div class="chip-select" id="f-intereses">
+        <span class="chip-option" data-val="musica">Música</span>
+        <span class="chip-option" data-val="cuentos">Cuentos</span>
+        <span class="chip-option" data-val="movimiento">Movimiento</span>
+        <span class="chip-option" data-val="agua">Agua</span>
+        <span class="chip-option" data-val="texturas">Texturas</span>
+        <span class="chip-option" data-val="carros">Carros</span>
+        <span class="chip-option" data-val="animales">Animales</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>¿Qué áreas quieren acompañar más de cerca?</label>
+      <div class="chip-select" id="f-areas"></div>
+    </div>
+
+    <div class="btn-row" style="justify-content:center;">
+      <button type="button" class="btn-solid" id="btn-guardar-perfil">Comenzar</button>
+    </div>
+    <p class="hint-text" style="text-align:center; margin-top:14px;">
+      Esta información se guarda solo en este celular, de forma privada. Nadie más la ve.
+    </p>
+  </div>
+</div>
+
+<!-- ============ APP PRINCIPAL ============ -->
+<div class="app" id="app-main" style="display:none;">
+
+  <div class="top-header">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAIAAABEtEjdAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAFDmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSfvu78nIGlkPSdXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQnPz4KPHg6eG1wbWV0YSB4bWxuczp4PSdhZG9iZTpuczptZXRhLyc+CjxyZGY6UkRGIHhtbG5zOnJkZj0naHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyc+CgogPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9JycKICB4bWxuczpBdHRyaWI9J2h0dHA6Ly9ucy5hdHRyaWJ1dGlvbi5jb20vYWRzLzEuMC8nPgogIDxBdHRyaWI6QWRzPgogICA8cmRmOlNlcT4KICAgIDxyZGY6bGkgcmRmOnBhcnNlVHlwZT0nUmVzb3VyY2UnPgogICAgIDxBdHRyaWI6Q3JlYXRlZD4yMDI1LTExLTEwPC9BdHRyaWI6Q3JlYXRlZD4KICAgICA8QXR0cmliOkV4dElkPjcwMTcyZGY0LWI5ZTItNGFkYS04OTUxLTVkMTYyNTY5M2VjYzwvQXR0cmliOkV4dElkPgogICAgIDxBdHRyaWI6RmJJZD41MjUyNjU5MTQxNzk1ODA8L0F0dHJpYjpGYklkPgogICAgIDxBdHRyaWI6VG91Y2hUeXBlPjI8L0F0dHJpYjpUb3VjaFR5cGU+CiAgICA8L3JkZjpsaT4KICAgPC9yZGY6U2VxPgogIDwvQXR0cmliOkFkcz4KIDwvcmRmOkRlc2NyaXB0aW9uPgoKIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PScnCiAgeG1sbnM6ZGM9J2h0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvJz4KICA8ZGM6dGl0bGU+CiAgIDxyZGY6QWx0PgogICAgPHJkZjpsaSB4bWw6bGFuZz0neC1kZWZhdWx0Jz5Mb2dvIFRpZW5kYSBkZSByb3BhIHBhcmEgYmViw6lzIG9zbyBDcmVhdGl2byBBenVsIC0gMTwvcmRmOmxpPgogICA8L3JkZjpBbHQ+CiAgPC9kYzp0aXRsZT4KIDwv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" alt="Mami a mil Store">
+    <div>
+      <div class="brandname">Mami a mil Store</div>
+      <div class="tagline">Acompañando el desarrollo de tu bebé</div>
+    </div>
+    <button type="button" class="edit-profile-btn no-print" id="btn-editar-perfil">Editar perfil</button>
+  </div>
+
+  <div class="tabbar no-print" id="tabbar">
+    <button class="tab-btn active" data-tab="inicio">🏠 Inicio</button>
+    <button class="tab-btn" data-tab="biblioteca">📚 Actividades</button>
+    <button class="tab-btn" data-tab="ahora">✨ ¿Qué hacemos?</button>
+    <button class="tab-btn" data-tab="hitos">📈 Hitos</button>
+    <button class="tab-btn" data-tab="logros">🏆 Logros</button>
+    <button class="tab-btn" data-tab="resumen">📋 Resumen</button>
+    <button class="tab-btn" data-tab="consulta">💬 Cuándo consultar</button>
+    <button class="tab-btn" data-tab="rutinas">🌙 Rutinas</button>
+  </div>
+
+  <!-- ---------- INICIO ---------- -->
+  <div class="screen active" id="screen-inicio"></div>
+
+  <!-- ---------- BIBLIOTECA ---------- -->
+  <div class="screen" id="screen-biblioteca"></div>
+
+  <!-- ---------- QUÉ HACEMOS AHORA ---------- -->
+  <div class="screen" id="screen-ahora"></div>
+
+  <!-- ---------- HITOS ---------- -->
+  <div class="screen" id="screen-hitos"></div>
+
+  <!-- ---------- LOGROS ---------- -->
+  <div class="screen" id="screen-logros"></div>
+
+  <!-- ---------- RESUMEN ---------- -->
+  <div class="screen" id="screen-resumen"></div>
+
+  <!-- ---------- CUÁNDO CONSULTAR ---------- -->
+  <div class="screen" id="screen-consulta"></div>
+
+  <!-- ---------- RUTINAS ---------- -->
+  <div class="screen" id="screen-rutinas"></div>
+
+</div>
+
+<script>
+const DATA = {"hitos": {"0-3": {"motriz_gruesa": ["Levanta un poco la cabeza cuando está boca abajo", "Mueve brazos y piernas de forma más suelta"], "lenguaje": ["Hace sonidos distintos al llanto (arrullos)", "Reacciona a sonidos fuertes"], "social_emocional": ["Te mira a la cara", "Empieza a sonreír al escuchar tu voz o verte"], "cognitiva": ["Sigue objetos con la mirada por un momento", "Presta atención a caras nuevas"]}, "4-6": {"motriz_gruesa": ["Sostiene la cabeza firme sin ayuda", "Se voltea de boca abajo a boca arriba", "Empieza a sentarse con apoyo"], "lenguaje": ["Hace sonidos de balbuceo (agú, gugú)", "Responde a su nombre"], "social_emocional": ["Sonríe espontáneamente, sobre todo a personas", "Reconoce caras conocidas"], "cognitiva": ["Sigue objetos en movimiento con los ojos", "Muestra curiosidad por cosas fuera de su alcance"]}, "7-9": {"motriz_gruesa": ["Se sienta sin apoyo", "Se pone de pie sujetándose de algo", "Se mueve para explorar (gateando o arrastrándose)"], "lenguaje": ["Balbucea sílabas repetidas como 'mamamama' o 'bababa'", "Hace gestos como decir adiós con la mano"], "social_emocional": ["Muestra ansiedad ante desconocidos", "Tiene una persona o juguete favorito"], "cognitiva": ["Busca un objeto que ve caer", "Juega a taparse y descubrirse la cara"]}, "10-12": {"motriz_gruesa": ["Se pone de pie sin apoyo por unos segundos", "Da algunos pasos sujetándose de muebles"], "lenguaje": ["Dice una o dos palabras además de 'mamá' o 'papá'", "Sigue instrucciones sencillas con gesto"], "social_emocional": ["Juega juegos simples como 'dar y recibir'", "Muestra preferencia clara por sus cuidadores"], "cognitiva": ["Explora objetos golpeándolos o metiéndolos en recipientes", "Encuentra objetos escondidos con facilidad"]}, "13-18": {"motriz_gruesa": ["Camina solo con firmeza", "Sube escalones sosteniéndose de la mano"], "lenguaje": ["Dice al menos seis a diez palabras", "Señala para pedir ayuda o mostrar algo"], "social_emocional": ["Imita tareas cotidianas (barrer, hablar por teléfono)", "Muestra afecto (abraza, besa)"], "cognitiva": ["Sabe para qué sirven objetos comunes (cepillo, cuchara)", "Señala una o dos partes del cuerpo"]}, "19-24": {"motriz_gruesa": ["Corre con soltura", "Patea una pelota", "Sube y baja escaleras sosteniéndose"], "lenguaje": ["Dice frases de dos palabras ('quiero agua')", "Usa al menos 50 palabras conocidas"], "social_emocional": ["Juega junto a otros niños, aunque no todavía con ellos", "Se emociona al estar con otros niños"], "cognitiva": ["Sigue instrucciones de dos pasos", "Clasifica objetos por forma o color"]}, "25-30": {"motriz_gruesa": ["Salta con ambos pies", "Se sube y baja de muebles bajos sin ayuda"], "lenguaje": ["Dice su nombre cuando se lo preguntan", "Usa frases cortas de más de dos palabras"], "social_emocional": ["Juega a 'hacer de cuenta' (dar de comer a un muñeco)", "Muestra interés en jugar con otros niños"], "cognitiva": ["Sigue rutinas de tres pasos", "Arma rompecabezas simples de piezas grandes"]}, "31-36": {"motriz_gruesa": ["Sube escaleras alternando los pies", "Pedalea un triciclo"], "lenguaje": ["Habla con frases de tres palabras o más", "Personas fuera de la familia entienden lo que dice"], "social_emocional": ["Juega con otros niños, no solo a su lado", "Muestra interés por consolar a alguien que llora"], "cognitiva": ["Nombra algunos colores", "Arma rompecabezas de 3 a 4 piezas"]}}, "hitos_ejemplo": {"0-3": {"motriz_gruesa": "Al ponerlo boca abajo unos segundos, intenta levantar la cabecita.", "lenguaje": "Hace sonidos suaves cuando está tranquilo, distintos al llanto.", "social_emocional": "Se queda mirando tu cara fijamente mientras le hablas.", "cognitiva": "Sigue con los ojos un juguete que mueves despacio frente a él."}, "4-6": {"motriz_gruesa": "Boca abajo, ya levanta el pecho apoyándose en los antebrazos.", "lenguaje": "Empieza a decir 'agú' o 'gugú' cuando está contento.", "social_emocional": "Sonríe apenas te ve acercarte, aunque no le hables.", "cognitiva": "Mira con atención un juguete que se mueve de un lado a otro."}, "7-9": {"motriz_gruesa": "Se sienta solo unos minutos sin caerse hacia los lados.", "lenguaje": "Repite 'bababa' o 'mamama' una y otra vez jugando.", "social_emocional": "Se pone serio o llora un poco con personas que no conoce.", "cognitiva": "Si esconde su juguete favorito bajo una manta, lo busca ahí."}, "10-12": {"motriz_gruesa": "Se para agarrado del sofá y aguanta unos segundos solo.", "lenguaje": "Dice 'mamá' o 'papá' dirigido específicamente a ti.", "social_emocional": "Te extiende los brazos para que lo cargues.", "cognitiva": "Mete y saca objetos de una caja una y otra vez."}, "13-18": {"motriz_gruesa": "Camina por la sala sin agarrarse de nada.", "lenguaje": "Señala el perro en un libro cuando le preguntas '¿dónde está?'", "social_emocional": "Toma la escoba e intenta 'barrer' imitándote.", "cognitiva": "Sabe que el teléfono se acerca a la oreja para 'hablar'."}, "19-24": {"motriz_gruesa": "Corre por el parque sin caerse con cada paso.", "lenguaje": "Dice 'más agua' o 'quiero upa' juntando dos palabras.", "social_emocional": "Juega al lado de otro niño en el arenero, cada uno con lo suyo.", "cognitiva": "Junta los bloques rojos en un montón y los azules en otro."}, "25-30": {"motriz_gruesa": "Salta con los dos pies juntos al mismo tiempo.", "lenguaje": "Dice frases como 'quiero jugar afuera'.", "social_emocional": "Le da de comer a su muñeco con una cuchara de juguete.", "cognitiva": "Sigue instrucciones como 'trae tus zapatos y ponlos aquí'."}, "31-36": {"motriz_gruesa": "Sube las escaleras alternando un pie en cada escalón.", "lenguaje": "Cuenta con frases completas lo que hizo en el día.", "social_emocional": "Se acerca a abrazar a un amigo que está llorando.", "cognitiva": "Nombra el color de su ropa o sus juguetes sin que se lo pidan."}}, "actividades": {"0-3": {"motriz_gruesa": {"nombre": "Tiempo boca abajo con vista", "objetivo": "Fortalecer cuello y hombros.", "habilidad": "Control cefálico", "materiales": ["Manta para tummy time"], "duracion": 5, "instrucciones": ["Coloca al bebé boca abajo sobre una manta, siempre despierto y supervisado.", "Ponte a su altura, de frente, para que quiera levantar la cabeza a verte.", "Termina cuando muestre cansancio o incomodidad."], "dificultad": "facil", "mas_facil": "Hazlo solo 1-2 minutos, sobre tu pecho reclinado.", "mas_dificil": "Coloca un objeto de colores frente a él para que se estire un poco más.", "seguridad": "Nunca lo dejes boca abajo para dormir ni sin supervisión.", "lugar": ["casa"], "sin_materiales": false}, "motriz_fina": {"nombre": "Agarre del dedo", "objetivo": "Estimular el reflejo de agarre.", "habilidad": "Prensión", "materiales": ["Ninguno"], "duracion": 5, "instrucciones": ["Ofrécele tu dedo índice cerca de su mano.", "Deja que lo agarre con fuerza; sentirá tu apoyo.", "Muévelo despacio de lado a lado sin forzar."], "dificultad": "facil", "mas_facil": "Solo ofrécele el dedo sin moverlo.", "mas_dificil": "Usa un sonajero ligero en vez del dedo.", "seguridad": "No tires ni levantes al bebé de las manos.", "lugar": ["casa"], "sin_materiales": true}, "lenguaje": {"nombre": "Eco de bebé", "objetivo": "Fomentar el intercambio de sonidos.", "habilidad": "Comunicación temprana", "materiales": ["Ninguno, solo tu voz"], "duracion": 5, "instrucciones": ["Cuando el bebé haga un sonido, repítelo tal cual.", "Haz una pequeña pausa, como esperando su 'respuesta'.", "Repite el juego varias veces al día, en momentos tranquilos."], "dificultad": "facil", "mas_facil": "Solo sonríele y háblale suave, sin esperar sonidos.", "mas_dificil": "Agrega una palabra nueva relacionada al sonido que hizo.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "bano", "comida"], "sin_materiales": true}, "cognitiva": {"nombre": "Sigue el sonajero", "objetivo": "Desarrollar el seguimiento visual.", "habilidad": "Atención visual", "materiales": ["Sonajero", "Tarjetas blanco y negro"], "duracion": 5, "instrucciones": ["Muéstrale el sonajero a unos 25 cm de su cara.", "Muévelo despacio de un lado a otro.", "Observa si sus ojos (y luego su cabeza) lo siguen."], "dificultad": "facil", "mas_facil": "Muévelo más despacio y más cerca.", "mas_dificil": "Muévelo en forma de círculo pequeño.", "seguridad": "Nunca dejes el sonajero dentro de la cuna sin supervisión.", "lugar": ["casa"], "sin_materiales": false}, "social_emocional": {"nombre": "Cara a cara", "objetivo": "Fortalecer el vínculo afectivo.", "habilidad": "Contacto visual y apego", "materiales": ["Ninguno"], "duracion": 5, "instrucciones": ["Sostenlo cerca de tu rostro, a la distancia en la que enfoca mejor.", "Sonríele y háblale con voz suave.", "Deja pausas para que él también 'participe' con gestos."], "dificultad": "facil", "mas_facil": "Solo sostenlo en brazos en silencio, piel con piel.", "mas_dificil": "Agrega distintas expresiones faciales para que las observe.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "comida"], "sin_materiales": true}, "sensorial": {"nombre": "Texturas suaves", "objetivo": "Estimular el tacto.", "habilidad": "Exploración sensorial", "materiales": ["Telas de distintas texturas"], "duracion": 5, "instrucciones": ["Pasa suavemente distintas telas (suave, rugosa, peluda) por sus manos.", "Nombra la textura mientras lo haces ('esto es suavecito').", "Observa su reacción y continúa si parece disfrutarlo."], "dificultad": "facil", "mas_facil": "Usa solo una tela muy suave.", "mas_dificil": "Agrega 3-4 texturas distintas en la misma sesión.", "seguridad": "Evita objetos pequeños que puedan representar riesgo de asfixia.", "lugar": ["casa"], "sin_materiales": false}}, "4-6": {"motriz_gruesa": {"nombre": "Apoyo en antebrazos", "objetivo": "Fortalecer tronco superior.", "habilidad": "Control de tronco", "materiales": ["Manta", "Juguete llamativo"], "duracion": 10, "instrucciones": ["Boca abajo, coloca un juguete un poco adelante de él.", "Anímalo a levantar el pecho apoyándose en los antebrazos para verlo.", "Aumenta poco a poco el tiempo boca abajo."], "dificultad": "facil", "mas_facil": "Recuéstalo sobre un cojín firme inclinado.", "mas_dificil": "Acerca y aleja el juguete para que gire un poco el cuerpo.", "seguridad": "Supervisión constante durante el tiempo boca abajo.", "lugar": ["casa"], "sin_materiales": false}, "motriz_fina": {"nombre": "Manos exploradoras", "objetivo": "Coordinación mano-boca-objeto.", "habilidad": "Prensión voluntaria", "materiales": ["Juguetes ligeros y seguros"], "duracion": 10, "instrucciones": ["Ofrécele un juguete ligero fácil de agarrar.", "Deja que lo lleve a la boca para explorarlo (es normal a esta edad).", "Cambia de juguete cuando pierda el interés."], "dificultad": "facil", "mas_facil": "Usa juguetes más grandes y livianos.", "mas_dificil": "Ofrece dos juguetes para que elija o pase de uno a otro.", "seguridad": "Verifica que no tengan piezas pequeñas desprendibles.", "lugar": ["casa"], "sin_materiales": false}, "lenguaje": {"nombre": "Conversación de balbuceos", "objetivo": "Ampliar los turnos de comunicación.", "habilidad": "Balbuceo e imitación", "materiales": ["Ninguno"], "duracion": 5, "instrucciones": ["Cuando balbucee, respóndele con palabras reales relacionadas.", "Haz pausas como si conversaran de verdad.", "Cántale frases cortas y repetitivas."], "dificultad": "facil", "mas_facil": "Solo imita sus sonidos sin agregar palabras.", "mas_dificil": "Introduce una palabra nueva cada vez que 'responde'.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "bano", "comida"], "sin_materiales": true}, "cognitiva": {"nombre": "Móvil de texturas", "objetivo": "Estimular la curiosidad visual.", "habilidad": "Atención sostenida", "materiales": ["Móvil o gimnasio de actividades", "Objetos texturizados"], "duracion": 10, "instrucciones": ["Coloca al bebé bajo el móvil o gimnasio de actividades.", "Deja que observe y trate de alcanzar los objetos colgantes.", "Cambia la posición de los objetos cada cierto tiempo."], "dificultad": "facil", "mas_facil": "Cuelga solo 1-2 objetos, bien visibles.", "mas_dificil": "Agrega objetos con sonido para que también escuche.", "seguridad": "Retira el móvil apenas empiece a sentarse o alcanzar cosas de pie.", "lugar": ["casa"], "sin_materiales": false}, "social_emocional": {"nombre": "¿Dónde está mamá?", "objetivo": "Fomentar la anticipación y el apego seguro.", "habilidad": "Permanencia afectiva", "materiales": ["Ninguno"], "duracion": 5, "instrucciones": ["Tápate la cara con las manos un segundo.", "Descúbrela diciendo '¡aquí estoy!' con voz alegre.", "Repite varias veces, dejando que se emocione al verte reaparecer."], "dificultad": "facil", "mas_facil": "Usa solo tu voz sin taparte la cara.", "mas_dificil": "Usa una manita del bebé para que se tape él mismo.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": true}, "sensorial": {"nombre": "Sonidos nuevos", "objetivo": "Estimular la audición y localización de sonidos.", "habilidad": "Discriminación auditiva", "materiales": ["Sonajero", "Campanita suave"], "duracion": 5, "instrucciones": ["Haz sonar un objeto suavemente a un lado de su cabeza.", "Observa si gira la cabeza buscando el sonido.", "Repite del otro lado."], "dificultad": "facil", "mas_facil": "Usa un solo sonido, siempre el mismo.", "mas_dificil": "Alterna dos sonidos distintos.", "seguridad": "Evita sonidos fuertes o repentinos.", "lugar": ["casa"], "sin_materiales": false}}, "7-9": {"motriz_gruesa": {"nombre": "Persigue el juguete", "objetivo": "Impulsar el gateo o desplazamiento.", "habilidad": "Locomoción", "materiales": ["Juguete rodante"], "duracion": 10, "instrucciones": ["Coloca un juguete un poco fuera de su alcance.", "Anímalo con la voz a moverse hacia él.", "Celebra cada intento, aunque no llegue del todo."], "dificultad": "facil", "mas_facil": "Pon el juguete muy cerca, casi a su alcance.", "mas_dificil": "Aumenta poco a poco la distancia.", "seguridad": "Despeja el área de objetos pequeños o filosos.", "lugar": ["casa"], "sin_materiales": false}, "motriz_fina": {"nombre": "Caja de tesoros", "objetivo": "Practicar el agarre en pinza y la coordinación.", "habilidad": "Pinza fina", "materiales": ["Recipiente", "Objetos pequeños seguros"], "duracion": 10, "instrucciones": ["Dale un recipiente y objetos un poco más grandes que su puño.", "Anímalo a meterlos y sacarlos del recipiente.", "Repite el juego, cambiando los objetos de vez en cuando."], "dificultad": "facil", "mas_facil": "Usa objetos más grandes y un recipiente ancho.", "mas_dificil": "Usa un recipiente con una abertura más pequeña.", "seguridad": "Todos los objetos deben ser más grandes que su boca, sin piezas sueltas.", "lugar": ["casa"], "sin_materiales": false}, "lenguaje": {"nombre": "Adiós con la mano", "objetivo": "Fomentar gestos comunicativos.", "habilidad": "Comunicación gestual", "materiales": ["Ninguno"], "duracion": 5, "instrucciones": ["Cada vez que alguien se despida, di 'adiós' moviendo tu mano.", "Toma su manito suavemente y ayúdalo a hacer el gesto.", "Repite en distintos momentos del día."], "dificultad": "facil", "mas_facil": "Solo modela el gesto sin tomar su mano.", "mas_dificil": "Agrega otros gestos como 'aplaudir' o 'no' con la cabeza.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": true}, "cognitiva": {"nombre": "¿Dónde quedó?", "objetivo": "Desarrollar la permanencia del objeto.", "habilidad": "Memoria y búsqueda", "materiales": ["Paño o manta", "Juguete pequeño"], "duracion": 10, "instrucciones": ["Muéstrale un juguete y escóndelo parcialmente bajo un paño.", "Anímalo a buscarlo levantando la tela.", "Cuando lo domine, escóndelo por completo."], "dificultad": "facil", "mas_facil": "Deja el juguete solo parcialmente cubierto.", "mas_dificil": "Escóndelo completamente o en dos lugares distintos.", "seguridad": "Usa telas livianas, nunca bolsas plásticas.", "lugar": ["casa"], "sin_materiales": false}, "social_emocional": {"nombre": "Aplaude conmigo", "objetivo": "Fomentar la imitación social.", "habilidad": "Imitación", "materiales": ["Ninguno"], "duracion": 5, "instrucciones": ["Aplaude despacio frente a él, con cara alegre.", "Toma sus manitos y ayúdalo a aplaudir también.", "Repite con canciones que incluyan aplausos."], "dificultad": "facil", "mas_facil": "Solo modela el aplauso sin tomar sus manos.", "mas_dificil": "Agrega una cancioncita con el aplauso.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": true}, "sensorial": {"nombre": "Camino de texturas", "objetivo": "Estimular el tacto en pies y manos.", "habilidad": "Exploración táctil", "materiales": ["Distintas superficies (alfombra, tela, madera)"], "duracion": 10, "instrucciones": ["Coloca al bebé sentado o gateando sobre distintas superficies.", "Déjalo tocar y sentir cada textura con calma.", "Nombra lo que siente ('esto es suave', 'esto es áspero')."], "dificultad": "facil", "mas_facil": "Usa una sola superficie por sesión.", "mas_dificil": "Combina 3-4 superficies distintas en un mismo recorrido.", "seguridad": "Verifica que no haya objetos pequeños en el camino.", "lugar": ["casa"], "sin_materiales": false}}, "10-12": {"motriz_gruesa": {"nombre": "Camina de mis manos", "objetivo": "Practicar la marcha asistida.", "habilidad": "Equilibrio y marcha", "materiales": ["Espacio libre de obstáculos"], "duracion": 10, "instrucciones": ["Sujeta sus manitos desde atrás o al frente.", "Camina despacio junto a él por la casa.", "Suelta una mano cuando lo veas seguro, sin forzarlo."], "dificultad": "facil", "mas_facil": "Camina sujetándolo de ambas manos, muy despacio.", "mas_dificil": "Sujeta solo una mano por tramos cortos.", "seguridad": "Despeja el camino de muebles con esquinas filosas.", "lugar": ["casa"], "sin_materiales": true}, "motriz_fina": {"nombre": "Torre de bloques", "objetivo": "Practicar el apilamiento.", "habilidad": "Coordinación mano-ojo", "materiales": ["Bloques blandos"], "duracion": 10, "instrucciones": ["Apila 2 bloques frente a él.", "Déjalo que los tire, le encanta la causa-efecto.", "Anímalo a intentar apilarlos él mismo."], "dificultad": "facil", "mas_facil": "Solo deja que tire torres que ya armaste.", "mas_dificil": "Anímalo a apilar 2-3 bloques por sí mismo.", "seguridad": "Usa bloques grandes, sin piezas pequeñas.", "lugar": ["casa"], "sin_materiales": false}, "lenguaje": {"nombre": "Cuento de imágenes", "objetivo": "Ampliar vocabulario receptivo.", "habilidad": "Comprensión de palabras", "materiales": ["Libro de cartón para bebés"], "duracion": 10, "instrucciones": ["Siéntense juntos con un libro de imágenes grandes.", "Señala y nombra cada imagen con voz clara.", "Deja que pase las páginas a su ritmo."], "dificultad": "facil", "mas_facil": "Usa un libro con solo 3-4 imágenes por página.", "mas_dificil": "Pregúntale '¿dónde está el perro?' y espera que señale.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "antes_dormir"], "sin_materiales": false}, "cognitiva": {"nombre": "Explora y descubre", "objetivo": "Fomentar la exploración causa-efecto.", "habilidad": "Resolución simple de problemas", "materiales": ["Recipientes de distintos tamaños"], "duracion": 10, "instrucciones": ["Dale recipientes de distintos tamaños para que los explore.", "Muéstrale cómo uno cabe dentro de otro.", "Deja que experimente libremente."], "dificultad": "facil", "mas_facil": "Usa solo dos recipientes muy distintos en tamaño.", "mas_dificil": "Agrega un tercer recipiente intermedio.", "seguridad": "Evita recipientes de vidrio o con bordes filosos.", "lugar": ["casa", "bano"], "sin_materiales": false}, "social_emocional": {"nombre": "Dame y toma", "objetivo": "Practicar turnos e interacción social.", "habilidad": "Reciprocidad social", "materiales": ["Pelota suave o juguete"], "duracion": 10, "instrucciones": ["Entrégale un juguete diciendo 'toma'.", "Pídele que te lo devuelva diciendo 'dame, por favor'.", "Repitan el intercambio varias veces con alegría."], "dificultad": "facil", "mas_facil": "Solo modela el gesto de dar, sin pedir que devuelva.", "mas_dificil": "Agrega un tercer participante (otro familiar) al juego.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": false}, "sensorial": {"nombre": "Pintura con las manos", "objetivo": "Estimular el tacto y la creatividad.", "habilidad": "Exploración táctil y visual", "materiales": ["Pintura no tóxica para bebés", "Papel grande"], "duracion": 15, "instrucciones": ["Coloca un poco de pintura no tóxica en un plato.", "Deja que use sus manitos para 'pintar' sobre el papel.", "Supervisa en todo momento, es una actividad con algo de desorden."], "dificultad": "medio", "mas_facil": "Usa solo un color.", "mas_dificil": "Usa 2-3 colores distintos.", "seguridad": "Usa siempre pintura certificada no tóxica y apta para bebés.", "lugar": ["casa"], "sin_materiales": false}}, "13-18": {"motriz_gruesa": {"nombre": "Escalón con ayuda", "objetivo": "Practicar subir y bajar escalones.", "habilidad": "Equilibrio y fuerza en piernas", "materiales": ["Escalón seguro o step bajo"], "duracion": 10, "instrucciones": ["Sujeta su mano frente a un escalón bajo y seguro.", "Anímalo a subir un pie después del otro.", "Ayúdalo a bajar de la misma forma, con calma."], "dificultad": "medio", "mas_facil": "Solo practica subir, sin bajar todavía.", "mas_dificil": "Deja que suba sujetándose solo del barandal.", "seguridad": "Siempre con supervisión directa y cerca de él.", "lugar": ["casa"], "sin_materiales": false}, "motriz_fina": {"nombre": "Garabatos libres", "objetivo": "Iniciar el trazo con crayón.", "habilidad": "Prensión de objetos pequeños", "materiales": ["Crayones gruesos", "Papel grande"], "duracion": 10, "instrucciones": ["Dale un crayón grueso fácil de sostener.", "Deja que garabatee libremente sobre el papel.", "Celebra sus trazos, sin buscar que dibuje algo específico."], "dificultad": "facil", "mas_facil": "Usa un crayón muy grueso tipo 'jumbo'.", "mas_dificil": "Anímalo a intentar copiar una línea que hagas tú.", "seguridad": "Usa crayones no tóxicos, supervisa que no se los lleve a la boca.", "lugar": ["casa"], "sin_materiales": false}, "lenguaje": {"nombre": "¿Dónde está?", "objetivo": "Ampliar vocabulario y comprensión.", "habilidad": "Identificación de objetos", "materiales": ["Libro o tarjetas de animales"], "duracion": 10, "instrucciones": ["Muéstrale un libro o tarjetas con animales u objetos.", "Pregúntale '¿dónde está el gato?' y espera que señale.", "Nombra en voz alta lo que va señalando."], "dificultad": "facil", "mas_facil": "Usa solo 2-3 imágenes por sesión.", "mas_dificil": "Pregunta por sonidos que hacen los animales.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "antes_dormir"], "sin_materiales": false}, "cognitiva": {"nombre": "Rompecabezas grande", "objetivo": "Practicar clasificación y encaje.", "habilidad": "Resolución de problemas simples", "materiales": ["Rompecabezas de piezas grandes"], "duracion": 15, "instrucciones": ["Empieza con un rompecabezas de 2-3 piezas grandes.", "Muéstrale dónde va cada pieza si se atasca.", "Celebra cuando logre encajar una pieza."], "dificultad": "medio", "mas_facil": "Usa un rompecabezas de solo 2 piezas.", "mas_dificil": "Sube a uno de 4-5 piezas.", "seguridad": "Verifica que las piezas sean grandes, sin riesgo de asfixia.", "lugar": ["casa"], "sin_materiales": false}, "social_emocional": {"nombre": "Ayudante de casa", "objetivo": "Fomentar la imitación de rutinas.", "habilidad": "Imitación social", "materiales": ["Escoba de juguete o real pequeña"], "duracion": 10, "instrucciones": ["Mientras haces una tarea sencilla, invítalo a 'ayudar'.", "Dale su propia escoba o trapo para imitarte.", "Agradécele su 'ayuda' con entusiasmo genuino."], "dificultad": "facil", "mas_facil": "Solo deja que te observe de cerca mientras narras lo que haces.", "mas_dificil": "Dale una tarea pequeña real, como guardar un objeto en su lugar.", "seguridad": "Ninguna precaución especial, evita productos de limpieza reales.", "lugar": ["casa"], "sin_materiales": false}, "sensorial": {"nombre": "Caja sensorial", "objetivo": "Explorar distintas texturas y temperaturas.", "habilidad": "Discriminación táctil", "materiales": ["Caja o bandeja", "Arroz, algodón, esponjas"], "duracion": 15, "instrucciones": ["Coloca distintos materiales seguros en una bandeja.", "Deja que explore con las manos, sin llevárselos a la boca.", "Nombra cada textura mientras la toca."], "dificultad": "medio", "mas_facil": "Usa un solo material por sesión.", "mas_dificil": "Combina 3-4 materiales de texturas muy distintas.", "seguridad": "Supervisión constante; evita materiales pequeños que pueda tragar.", "lugar": ["casa"], "sin_materiales": false}}, "19-24": {"motriz_gruesa": {"nombre": "Circuito de obstáculos", "objetivo": "Practicar coordinación general.", "habilidad": "Equilibrio y motricidad global", "materiales": ["Cojines", "Cajas", "Cinta para el piso"], "duracion": 15, "instrucciones": ["Arma un circuito sencillo con cojines para pasar por encima.", "Agrega una caja para rodear y una línea para caminar sobre ella.", "Recorran el circuito juntos varias veces."], "dificultad": "medio", "mas_facil": "Usa solo un obstáculo (los cojines).", "mas_dificil": "Agrega saltar con los dos pies al final del circuito.", "seguridad": "Verifica que la superficie no sea resbalosa.", "lugar": ["casa"], "sin_materiales": false}, "motriz_fina": {"nombre": "Enhebrado grande", "objetivo": "Practicar coordinación fina precisa.", "habilidad": "Motricidad fina y concentración", "materiales": ["Cuentas grandes", "Cordón grueso"], "duracion": 10, "instrucciones": ["Dale cuentas grandes y un cordón con punta rígida.", "Muéstrale cómo pasar el cordón por el agujero.", "Deja que practique a su ritmo, sin apurarlo."], "dificultad": "medio", "mas_facil": "Usa solo 2-3 cuentas muy grandes.", "mas_dificil": "Pídele que las enhebre siguiendo un patrón de color.", "seguridad": "Supervisión constante; las cuentas son pequeñas y representan riesgo de asfixia.", "lugar": ["casa"], "sin_materiales": false}, "lenguaje": {"nombre": "Cuéntame qué ves", "objetivo": "Fomentar la expresión con frases.", "habilidad": "Lenguaje expresivo", "materiales": ["Libro de imágenes"], "duracion": 10, "instrucciones": ["Miren juntos un libro o salgan a caminar.", "Pregúntale '¿qué ves?' y espera que arme una frase corta.", "Amplía lo que dice agregando una palabra más."], "dificultad": "facil", "mas_facil": "Acepta respuestas de una sola palabra.", "mas_dificil": "Pide que describa con más de dos palabras.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "aire_libre"], "sin_materiales": true}, "cognitiva": {"nombre": "Clasifica y ordena", "objetivo": "Practicar categorización.", "habilidad": "Pensamiento lógico temprano", "materiales": ["Bloques de colores y formas"], "duracion": 10, "instrucciones": ["Mezcla bloques de distintos colores y formas.", "Pídele que junte los del mismo color en un montón.", "Cambia el criterio a forma cuando lo domine."], "dificultad": "medio", "mas_facil": "Usa solo dos colores para clasificar.", "mas_dificil": "Clasifica por color y forma al mismo tiempo.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": false}, "social_emocional": {"nombre": "Turnos con amigos", "objetivo": "Practicar la espera y la interacción.", "habilidad": "Juego social", "materiales": ["Pelota", "Juguete para compartir"], "duracion": 15, "instrucciones": ["Busca un momento de juego con otro niño de edad similar.", "Propón un juego simple de turnos, como pasar la pelota.", "Elogia cada vez que espera su turno con calma."], "dificultad": "medio", "mas_facil": "Practica turnos primero contigo, sin otro niño.", "mas_dificil": "Suma un tercer niño al juego de turnos.", "seguridad": "Supervisión activa para mediar cualquier conflicto por juguetes.", "lugar": ["casa", "aire_libre"], "sin_materiales": false}, "sensorial": {"nombre": "Agua y trasvase", "objetivo": "Explorar propiedades del agua.", "habilidad": "Exploración sensorial y motricidad fina", "materiales": ["Recipientes", "Agua"], "duracion": 15, "instrucciones": ["En el momento del baño, dale vasitos o recipientes vacíos.", "Muéstrale cómo llenar uno y vaciarlo en otro.", "Deja que repita el trasvase libremente."], "dificultad": "facil", "mas_facil": "Usa un solo recipiente para llenar y vaciar.", "mas_dificil": "Usa recipientes de distinto tamaño para comparar cuánto cabe.", "seguridad": "Nunca dejes al bebé solo cerca del agua, ni un segundo.", "lugar": ["bano"], "sin_materiales": false}}, "25-30": {"motriz_gruesa": {"nombre": "Camina la línea", "objetivo": "Practicar el equilibrio dinámico.", "habilidad": "Equilibrio", "materiales": ["Cinta adhesiva o cuerda"], "duracion": 10, "instrucciones": ["Marca una línea recta en el piso con cinta.", "Invítalo a caminar sobre ella como en la cuerda floja.", "Repite varias veces, celebrando cada intento."], "dificultad": "medio", "mas_facil": "Usa una línea muy corta y ancha.", "mas_dificil": "Haz una línea curva o en zigzag.", "seguridad": "Realízalo en una superficie sin objetos alrededor.", "lugar": ["casa"], "sin_materiales": false}, "motriz_fina": {"nombre": "Tijeras seguras", "objetivo": "Iniciar el uso de tijeras infantiles.", "habilidad": "Coordinación bimanual", "materiales": ["Tijeras de punta redonda", "Papel"], "duracion": 15, "instrucciones": ["Dale tijeras de punta redonda diseñadas para niños.", "Muéstrale cómo abrir y cerrar para cortar una tira de papel.", "Supervisa de cerca todo el tiempo."], "dificultad": "medio", "mas_facil": "Solo practica abrir y cerrar la tijera sin cortar.", "mas_dificil": "Pídele que corte siguiendo una línea marcada.", "seguridad": "Supervisión constante; usa solo tijeras específicas para niños.", "lugar": ["casa"], "sin_materiales": false}, "lenguaje": {"nombre": "¿Qué pasó después?", "objetivo": "Fomentar la narrativa y secuencia.", "habilidad": "Comprensión narrativa", "materiales": ["Libro de cuentos"], "duracion": 10, "instrucciones": ["Lean juntos un cuento corto con imágenes claras.", "Al terminar, pregúntale '¿qué pasó al final?'", "Deja que responda a su manera, sin corregir de más."], "dificultad": "facil", "mas_facil": "Haz la pregunta mientras miran las imágenes, no al final.", "mas_dificil": "Pídele que invente lo que pasará después.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "antes_dormir"], "sin_materiales": false}, "cognitiva": {"nombre": "Memorama fácil", "objetivo": "Practicar memoria y atención.", "habilidad": "Memoria visual", "materiales": ["Tarjetas de memorama"], "duracion": 10, "instrucciones": ["Empiecen con solo 4 tarjetas (2 pares) boca abajo.", "Túrnense para voltear dos tarjetas buscando el par.", "Aumenta la cantidad de tarjetas poco a poco."], "dificultad": "medio", "mas_facil": "Usa solo 2 tarjetas (1 par) para empezar.", "mas_dificil": "Sube a 6 u 8 tarjetas.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": false}, "social_emocional": {"nombre": "La tiendita", "objetivo": "Fomentar el juego simbólico y los roles.", "habilidad": "Juego de roles", "materiales": ["Alimentos de juguete", "Monedas de juguete"], "duracion": 15, "instrucciones": ["Armen juntos una 'tiendita' con alimentos de juguete.", "Túrnense el rol de vendedor y comprador.", "Sigan la historia que él vaya proponiendo."], "dificultad": "facil", "mas_facil": "Solo juega a 'darle de comer' a un muñeco.", "mas_dificil": "Suma a otro niño o familiar al juego de roles.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": false}, "sensorial": {"nombre": "Masa casera", "objetivo": "Estimular el tacto y la creatividad.", "habilidad": "Exploración táctil y motricidad fina", "materiales": ["Masa moldeable no tóxica"], "duracion": 15, "instrucciones": ["Dale una porción de masa moldeable segura para niños.", "Deja que la aplaste, estire y forme figuras libremente.", "Acompaña sin dirigir demasiado el juego."], "dificultad": "facil", "mas_facil": "Solo deja que la toque y aplaste, sin pedir formas.", "mas_dificil": "Pídele que forme una bolita o una serpiente.", "seguridad": "Usa masa no tóxica, supervisa que no se la lleve a la boca.", "lugar": ["casa"], "sin_materiales": false}}, "31-36": {"motriz_gruesa": {"nombre": "Triciclo", "objetivo": "Practicar el pedaleo y coordinación de piernas.", "habilidad": "Coordinación motora", "materiales": ["Triciclo"], "duracion": 15, "instrucciones": ["Siéntalo en el triciclo en un espacio seguro y plano.", "Ayúdalo a coordinar el movimiento de pedaleo con tus manos al inicio.", "Deja que practique solo cuando tome confianza."], "dificultad": "medio", "mas_facil": "Empújalo tú mientras se acostumbra al pedaleo.", "mas_dificil": "Proponle un pequeño recorrido con una vuelta.", "seguridad": "Usa casco si el terreno lo amerita y supervisa cerca de calles.", "lugar": ["aire_libre"], "sin_materiales": false}, "motriz_fina": {"nombre": "Vestirse solo", "objetivo": "Practicar autonomía y motricidad fina.", "habilidad": "Independencia funcional", "materiales": ["Ropa fácil de poner"], "duracion": 10, "instrucciones": ["Dale una prenda sencilla, como una gorra o chaqueta sin botones.", "Anímalo a intentar ponérsela solo, sin apurarlo.", "Ayuda solo en la parte final si se atasca."], "dificultad": "medio", "mas_facil": "Empieza con prendas muy simples, como calcetines.", "mas_dificil": "Suma prendas con broches o cierres grandes.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": false}, "lenguaje": {"nombre": "Inventa un cuento", "objetivo": "Fomentar la imaginación y el lenguaje narrativo.", "habilidad": "Lenguaje expresivo avanzado", "materiales": ["Ninguno"], "duracion": 10, "instrucciones": ["Empiecen un cuento con 'había una vez...'", "Deja que él agregue lo que sigue, aunque no tenga mucho sentido.", "Continúen turnándose para armar la historia juntos."], "dificultad": "facil", "mas_facil": "Tú cuentas la mayor parte, él solo agrega una palabra.", "mas_dificil": "Pídele que invente el final completo.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa", "antes_dormir"], "sin_materiales": true}, "cognitiva": {"nombre": "Rompecabezas de más piezas", "objetivo": "Practicar resolución de problemas más compleja.", "habilidad": "Razonamiento espacial", "materiales": ["Rompecabezas de 4 a 6 piezas"], "duracion": 15, "instrucciones": ["Empiecen con un rompecabezas de 4 piezas.", "Anímalo a probar por sí mismo antes de ayudar.", "Aumenten la dificultad cuando lo domine con facilidad."], "dificultad": "medio", "mas_facil": "Usa un rompecabezas de solo 3 piezas grandes.", "mas_dificil": "Sube a uno de 8-10 piezas.", "seguridad": "Ninguna precaución especial.", "lugar": ["casa"], "sin_materiales": false}, "social_emocional": {"nombre": "Jugar en equipo", "objetivo": "Practicar la cooperación con otros niños.", "habilidad": "Habilidades sociales", "materiales": ["Juguetes para compartir"], "duracion": 15, "instrucciones": ["Busca un juego cooperativo con otro niño de su edad, como armar algo juntos.", "Anímalos a compartir materiales y turnarse tareas.", "Interviene con calma si surge algún conflicto."], "dificultad": "medio", "mas_facil": "Practica primero un juego cooperativo contigo.", "mas_dificil": "Suma un juego con reglas simples, como una carrera por turnos.", "seguridad": "Supervisión activa para mediar conflictos.", "lugar": ["casa", "aire_libre"], "sin_materiales": false}, "sensorial": {"nombre": "Búsqueda del tesoro", "objetivo": "Estimular varios sentidos a la vez.", "habilidad": "Integración sensorial", "materiales": ["Objetos pequeños escondidos", "Una caja o bolsa"], "duracion": 15, "instrucciones": ["Esconde varios objetos conocidos dentro de una caja con arroz o telas.", "Pídele que los encuentre solo con las manos, sin mirar.", "Cuando encuentre uno, pregúntale qué cree que es antes de sacarlo."], "dificultad": "medio", "mas_facil": "Deja los objetos parcialmente visibles.", "mas_dificil": "Véndale los ojos suavemente (si se siente cómodo) para aumentar el reto.", "seguridad": "Usa solo objetos grandes, sin riesgo de asfixia.", "lugar": ["casa"], "sin_materiales": false}}}, "area_labels": {"motriz_gruesa": "Motricidad gruesa", "motriz_fina": "Motricidad fina", "lenguaje": "Lenguaje y comunicación", "cognitiva": "Cognitiva", "social_emocional": "Social y emocional", "sensorial": "Sensorial"}, "rango_labels": {"0-3": "0 a 3 meses", "4-6": "4 a 6 meses", "7-9": "7 a 9 meses", "10-12": "10 a 12 meses", "13-18": "13 a 18 meses", "19-24": "19 a 24 meses", "25-30": "25 a 30 meses", "31-36": "31 a 36 meses"}};
+
+const ICONS = {
+  motriz_gruesa: '<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="10" r="5" fill="currentColor"/><path d="M24 16v14M24 20l-10 6M24 20l10 6M24 30l-7 12M24 30l7 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  motriz_fina: '<svg viewBox="0 0 48 48" fill="none"><path d="M14 26V14a3 3 0 0 1 6 0v8M20 22V10a3 3 0 0 1 6 0v12M26 22V12a3 3 0 0 1 6 0v10M32 24V18a3 3 0 0 1 6 0v10c0 7-5 12-12 12h-2c-5 0-8-2-11-6l-5-7a3 3 0 0 1 4.5-3.8L14 26" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  lenguaje: '<svg viewBox="0 0 48 48" fill="none"><path d="M8 12h32v18H20l-7 7v-7H8V12z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="17" cy="21" r="1.8" fill="currentColor"/><circle cx="24" cy="21" r="1.8" fill="currentColor"/><circle cx="31" cy="21" r="1.8" fill="currentColor"/></svg>',
+  cognitiva: '<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" rx="3" stroke="currentColor" stroke-width="3"/><rect x="26" y="8" width="14" height="14" rx="3" stroke="currentColor" stroke-width="3"/><rect x="8" y="26" width="14" height="14" rx="3" stroke="currentColor" stroke-width="3"/><rect x="26" y="26" width="14" height="14" rx="3" fill="currentColor"/></svg>',
+  social_emocional: '<svg viewBox="0 0 48 48" fill="none"><circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="3"/><circle cx="32" cy="16" r="6" stroke="currentColor" stroke-width="3"/><path d="M6 38c1-7 6-11 10-11s9 4 10 11M22 38c1-7 6-11 10-11s9 4 10 11" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>',
+  sensorial: '<svg viewBox="0 0 48 48" fill="none"><path d="M4 24c6-10 14-15 20-15s14 5 20 15c-6 10-14 15-20 15S10 34 4 24z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="3"/></svg>'
+};
+
+
+// ================= ESTADO =================
+const STORAGE_KEY = 'mamiamil_hitos_v1';
+let state = null;
+
+function defaultState(){
+  return {
+    perfil: null,
+    hitosEstado: {},
+    actividadesHechas: {},
+    actividadesGuardadas: {},
+    logros: [],
+    resumenNotas: '',
+    preguntasConsulta: ''
+  };
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){ console.warn('No se pudo leer el almacenamiento local', e); }
+  return defaultState();
+}
+
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){ console.warn('No se pudo guardar en el almacenamiento local', e); }
+}
+
+// ================= EDAD =================
+const RANGOS = ["0-3","4-6","7-9","10-12","13-18","19-24","25-30","31-36"];
+
+function monthsBetween(d1, d2){
+  let months = (d2.getFullYear() - d1.getFullYear()) * 12 + (d2.getMonth() - d1.getMonth());
+  if(d2.getDate() < d1.getDate()) months -= 1;
+  return Math.max(0, months);
+}
+
+function edadCronologicaMeses(perfil){
+  if(!perfil || !perfil.nacimiento) return 0;
+  const nac = new Date(perfil.nacimiento + 'T00:00:00');
+  const hoy = new Date();
+  return monthsBetween(nac, hoy);
+}
+
+function esPrematuro(perfil){
+  return perfil && perfil.semanas && parseInt(perfil.semanas) < 37;
+}
+
+function edadCorregidaMeses(perfil){
+  if(!esPrematuro(perfil)) return null;
+  const cron = edadCronologicaMeses(perfil);
+  if(cron >= 24) return null; // la corrección suele dejar de aplicarse cerca de los 2 años
+  const semanasFaltantes = 40 - parseInt(perfil.semanas);
+  const mesesCorreccion = semanasFaltantes / 4.345;
+  return Math.max(0, Math.round((cron - mesesCorreccion) * 10) / 10);
+}
+
+function rangoDeMeses(meses){
+  const m = Math.round(meses);
+  if(m <= 3) return "0-3";
+  if(m <= 6) return "4-6";
+  if(m <= 9) return "7-9";
+  if(m <= 12) return "10-12";
+  if(m <= 18) return "13-18";
+  if(m <= 24) return "19-24";
+  if(m <= 30) return "25-30";
+  return "31-36";
+}
+
+function edadTexto(meses){
+  meses = Math.round(meses);
+  if(meses === 0) return 'Recién nacido';
+  if(meses < 12) return meses + (meses === 1 ? ' mes' : ' meses');
+  const anios = Math.floor(meses/12);
+  const rest = meses % 12;
+  let txt = anios + (anios === 1 ? ' año' : ' años');
+  if(rest > 0) txt += ' ' + rest + (rest === 1 ? ' mes' : ' meses');
+  return txt;
+}
+
+function rangoActual(){
+  const meses = edadCorregidaMeses(state.perfil) !== null ? edadCorregidaMeses(state.perfil) : edadCronologicaMeses(state.perfil);
+  return rangoDeMeses(meses);
+}
+
+const AREAS = ["motriz_gruesa","motriz_fina","lenguaje","cognitiva","social_emocional","sensorial"];
+const AREAS_HITOS = ["motriz_gruesa","lenguaje","social_emocional","cognitiva"];
+
+const LUGAR_LABELS = {casa:'En casa', aire_libre:'Al aire libre', bano:'Durante el baño', comida:'Durante la comida', antes_dormir:'Antes de dormir'};
+
+// ================= ONBOARDING / PERFIL =================
+const onboarding = document.getElementById('onboarding');
+const appMain = document.getElementById('app-main');
+
+function initAreasChips(){
+  const wrap = document.getElementById('f-areas');
+  wrap.innerHTML = '';
+  AREAS.forEach(a => {
+    const chip = document.createElement('span');
+    chip.className = 'chip-option';
+    chip.dataset.val = a;
+    chip.textContent = DATA.area_labels[a];
+    chip.addEventListener('click', () => chip.classList.toggle('selected'));
+    wrap.appendChild(chip);
+  });
+}
+
+document.getElementById('f-intereses').querySelectorAll('.chip-option').forEach(chip => {
+  chip.addEventListener('click', () => chip.classList.toggle('selected'));
+});
+
+document.getElementById('f-semanas').addEventListener('input', (e) => {
+  const wrap = document.getElementById('f-fpp-wrap');
+  wrap.style.display = parseInt(e.target.value) < 37 ? 'block' : 'none';
+});
+
+let fotoDataUrl = null;
+document.getElementById('f-foto').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const size = 200;
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const scale = Math.max(size/img.width, size/img.height);
+      const w = img.width*scale, h = img.height*scale;
+      ctx.drawImage(img, (size-w)/2, (size-h)/2, w, h);
+      fotoDataUrl = canvas.toDataURL('image/jpeg', 0.85);
+      document.getElementById('f-foto-preview').innerHTML = `<img src="${fotoDataUrl}">`;
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+function abrirOnboarding(editar){
+  initAreasChips();
+  if(editar && state.perfil){
+    const p = state.perfil;
+    document.getElementById('f-nombre').value = p.nombre || '';
+    document.getElementById('f-nacimiento').value = p.nacimiento || '';
+    document.getElementById('f-semanas').value = p.semanas || 40;
+    document.getElementById('f-fpp').value = p.fpp || '';
+    document.getElementById('f-fpp-wrap').style.display = esPrematuro(p) ? 'block' : 'none';
+    fotoDataUrl = p.foto || null;
+    document.getElementById('f-foto-preview').innerHTML = fotoDataUrl ? `<img src="${fotoDataUrl}">` : '';
+    (p.intereses||[]).forEach(v => {
+      const el = document.querySelector(`#f-intereses .chip-option[data-val="${v}"]`);
+      if(el) el.classList.add('selected');
+    });
+    (p.areas||[]).forEach(v => {
+      const el = document.querySelector(`#f-areas .chip-option[data-val="${v}"]`);
+      if(el) el.classList.add('selected');
+    });
+  } else {
+    document.getElementById('f-nombre').value = '';
+    document.getElementById('f-nacimiento').value = '';
+    document.getElementById('f-semanas').value = 40;
+    document.getElementById('f-fpp').value = '';
+    document.getElementById('f-fpp-wrap').style.display = 'none';
+    fotoDataUrl = null;
+    document.getElementById('f-foto-preview').innerHTML = '';
+  }
+  onboarding.style.display = 'block';
+  appMain.style.display = 'none';
+}
+
+document.getElementById('btn-guardar-perfil').addEventListener('click', () => {
+  const nombre = document.getElementById('f-nombre').value.trim();
+  const nacimiento = document.getElementById('f-nacimiento').value;
+  if(!nombre || !nacimiento){
+    alert('Por favor completa al menos el nombre y la fecha de nacimiento.');
+    return;
+  }
+  const intereses = Array.from(document.querySelectorAll('#f-intereses .chip-option.selected')).map(c => c.dataset.val);
+  const areas = Array.from(document.querySelectorAll('#f-areas .chip-option.selected')).map(c => c.dataset.val);
+  state.perfil = {
+    nombre,
+    nacimiento,
+    foto: fotoDataUrl,
+    semanas: document.getElementById('f-semanas').value,
+    fpp: document.getElementById('f-fpp').value,
+    intereses,
+    areas
+  };
+  saveState();
+  onboarding.style.display = 'none';
+  appMain.style.display = 'block';
+  renderAll();
+});
+
+document.getElementById('btn-editar-perfil').addEventListener('click', () => abrirOnboarding(true));
+
+// ================= TABS =================
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => irATab(btn.dataset.tab));
+});
+
+const RENDER_POR_TAB = {
+  inicio: renderInicio,
+  biblioteca: renderBiblioteca,
+  ahora: renderAhora,
+  hitos: renderHitos,
+  logros: renderLogros,
+  resumen: renderResumen,
+  consulta: renderConsulta,
+  rutinas: renderRutinas
+};
+
+function irATab(tab){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  if(RENDER_POR_TAB[tab]) RENDER_POR_TAB[tab]();
+  document.getElementById('screen-' + tab).classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+// ================= MENSAJES TRANQUILIZADORES =================
+const MENSAJES_CALMA = [
+  "Cada bebé avanza a su propio ritmo. Observa, acompaña y disfruta el proceso.",
+  "No hay una carrera. Lo que hoy parece pequeño, mañana es un gran paso.",
+  "Jugar con tu bebé, aunque sean cinco minutos, ya es acompañar su desarrollo.",
+  "Compararlo con otros bebés no ayuda. Su ritmo es único y está bien así.",
+  "Estar presente vale más que hacerlo perfecto. Lo estás haciendo bien.",
+  "El desarrollo no es una línea recta. Hay días de grandes saltos y días de calma.",
+  "Tu bebé no necesita que aciertes siempre, necesita que estés cerca."
+];
+
+function mensajeDelDia(){
+  const dia = new Date().getDate();
+  return MENSAJES_CALMA[dia % MENSAJES_CALMA.length];
+}
+
+// ================= RENDER: INICIO =================
+function renderInicio(){
+  const p = state.perfil;
+  const cron = edadCronologicaMeses(p);
+  const corr = edadCorregidaMeses(p);
+  const rango = rangoActual();
+  const etapa = DATA.rango_labels[rango];
+
+  const areasHoy = [AREAS[new Date().getDate() % 6], AREAS[(new Date().getDate()+2) % 6], AREAS[(new Date().getDate()+4) % 6]];
+  const areasSet = [...new Set(areasHoy)];
+  while(areasSet.length < 3){ areasSet.push(AREAS[areasSet.length]); }
+
+  const hechosClave = Object.keys(state.actividadesHechas).filter(k => k.startsWith(rango + '|'));
+  const totalAreas = AREAS.length;
+  const progreso = Math.round((hechosClave.length / totalAreas) * 100);
+
+  // hito destacado: primer hito de este rango que no esté en estado 'frecuente'
+  let hitoDestacado = null;
+  outer:
+  for(const area of AREAS_HITOS){
+    const lista = DATA.hitos[rango][area];
+    for(let i=0;i<lista.length;i++){
+      const key = rango+'|'+area+'|'+i;
+      const est = (state.hitosEstado[key]||{}).estado;
+      if(est !== 'frecuente'){ hitoDestacado = {texto:lista[i], area}; break outer; }
+    }
+  }
+  if(!hitoDestacado){
+    hitoDestacado = {texto: DATA.hitos[rango][AREAS_HITOS[0]][0], area: AREAS_HITOS[0]};
+  }
+
+  const ultimoLogro = state.logros.length ? state.logros[state.logros.length-1] : null;
+
+  let html = `
+    <div class="hero-card">
+      <div class="hero-top">
+        ${p.foto ? `<img class="hero-photo" src="${p.foto}">` : `<div class="hero-photo"></div>`}
+        <div>
+          <div class="hero-name">${p.nombre}</div>
+          <div class="hero-age">${edadTexto(cron)}${corr !== null ? ' · edad corregida: ' + edadTexto(corr) : ''}</div>
+          <div class="hero-stage">${etapa}</div>
+        </div>
+      </div>
+      <div class="hero-msg">${mensajeDelDia()}</div>
+    </div>
+
+    <div class="card">
+      <p class="section-title" style="font-size:16px;">Progreso de esta semana</p>
+      <div class="progress-row">
+        <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${progreso}%"></div></div>
+        <div class="progress-label">${hechosClave.length}/${totalAreas}</div>
+      </div>
+      <p class="section-sub" style="margin-bottom:0;">Actividades marcadas como "Lo hicimos" en esta etapa.</p>
+    </div>
+
+    <div class="card">
+      <p class="section-title" style="font-size:16px;">Hito destacado de esta etapa</p>
+      <p style="font-size:14.5px; margin:0;">${hitoDestacado.texto}</p>
+      <p class="section-sub" style="margin:6px 0 0;">Área: ${DATA.area_labels[hitoDestacado.area]}</p>
+    </div>
+
+    <div class="card">
+      <p class="section-title" style="font-size:16px;">Actividades recomendadas para hoy</p>
+  `;
+
+  areasSet.slice(0,3).forEach(area => {
+    const act = DATA.actividades[rango][area];
+    html += `
+      <div class="mini-game-card">
+        <div class="mini-game-icon">${ICONS[area]}</div>
+        <div>
+          <p class="mini-game-title">${act.nombre}</p>
+          <p class="mini-game-area">${DATA.area_labels[area]}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `
+      <div class="btn-row">
+        <button class="btn-outline" onclick="irATab('biblioteca')">Ver todas las actividades</button>
+      </div>
+    </div>
+
+    <div class="quick-link-card" onclick="irATab('ahora')">
+      <div>
+        <b>¿Qué hacemos ahora?</b><br>
+        <span>Dime cuánto tiempo tienes y te sugiero algo al instante</span>
+      </div>
+      <span style="font-size:22px;">✨</span>
+    </div>
+  `;
+
+  if(ultimoLogro){
+    html += `
+      <div class="card">
+        <p class="section-title" style="font-size:16px;">Último logro registrado</p>
+        <p style="font-size:14.5px; margin:0;"><b>${ultimoLogro.nombre}</b> — ${formatearFecha(ultimoLogro.fecha)}</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('screen-inicio').innerHTML = html;
+}
+
+function formatearFecha(iso){
+  if(!iso) return '';
+  const d = new Date(iso + 'T00:00:00');
+  return d.toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric'});
+}
+
+// ================= RENDER: BIBLIOTECA =================
+let filtroState = { rango: 'actual', area: 'todas', duracion: 'todas', lugar: 'todos', sinMateriales: false };
+
+function renderBiblioteca(){
+  const container = document.getElementById('screen-biblioteca');
+  let html = `
+    <p class="section-title">Biblioteca de actividades</p>
+    <p class="section-sub">Filtra por edad, área o el tiempo que tengas disponible.</p>
+
+    <div class="filters-panel no-print">
+      <div class="filter-group">
+        <span class="filter-group-label">Edad</span>
+        <div class="chip-select" id="filtro-rango"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-group-label">Área</span>
+        <div class="chip-select" id="filtro-area"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-group-label">Duración</span>
+        <div class="chip-select" id="filtro-duracion">
+          <span class="chip-option" data-val="todas">Cualquiera</span>
+          <span class="chip-option" data-val="5">Hasta 5 min</span>
+          <span class="chip-option" data-val="10">Hasta 10 min</span>
+          <span class="chip-option" data-val="15">Hasta 15 min</span>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-group-label">Lugar</span>
+        <div class="chip-select" id="filtro-lugar">
+          <span class="chip-option" data-val="todos">Cualquiera</span>
+          <span class="chip-option" data-val="casa">En casa</span>
+          <span class="chip-option" data-val="aire_libre">Al aire libre</span>
+          <span class="chip-option" data-val="bano">Baño</span>
+          <span class="chip-option" data-val="comida">Comida</span>
+          <span class="chip-option" data-val="antes_dormir">Antes de dormir</span>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="chip-option" id="filtro-sin-materiales" data-val="sin">Sin comprar materiales</span>
+      </div>
+    </div>
+
+    <div id="biblioteca-resultados"></div>
+  `;
+  container.innerHTML = html;
+
+  const rangoWrap = document.getElementById('filtro-rango');
+  rangoWrap.innerHTML = `<span class="chip-option" data-val="actual">Etapa actual</span>` +
+    RANGOS.map(r => `<span class="chip-option" data-val="${r}">${DATA.rango_labels[r]}</span>`).join('');
+
+  const areaWrap = document.getElementById('filtro-area');
+  areaWrap.innerHTML = `<span class="chip-option" data-val="todas">Todas</span>` +
+    AREAS.map(a => `<span class="chip-option" data-val="${a}">${DATA.area_labels[a]}</span>`).join('');
+
+  function setActive(wrapId, val){
+    document.querySelectorAll('#'+wrapId+' .chip-option').forEach(c => c.classList.toggle('selected', c.dataset.val === val));
+  }
+  setActive('filtro-rango', filtroState.rango);
+  setActive('filtro-area', filtroState.area);
+  setActive('filtro-duracion', filtroState.duracion);
+  setActive('filtro-lugar', filtroState.lugar);
+  document.getElementById('filtro-sin-materiales').classList.toggle('selected', filtroState.sinMateriales);
+
+  ['filtro-rango','filtro-area','filtro-duracion','filtro-lugar'].forEach(wrapId => {
+    document.querySelectorAll('#'+wrapId+' .chip-option').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const key = wrapId.replace('filtro-','');
+        filtroState[key === 'duracion' ? 'duracion' : key] = chip.dataset.val;
+        renderBibliotecaResultados();
+        setActive(wrapId, chip.dataset.val);
+      });
+    });
+  });
+  document.getElementById('filtro-sin-materiales').addEventListener('click', (e) => {
+    filtroState.sinMateriales = !filtroState.sinMateriales;
+    e.target.classList.toggle('selected', filtroState.sinMateriales);
+    renderBibliotecaResultados();
+  });
+
+  renderBibliotecaResultados();
+}
+
+function actividadesConFiltro(duracionModo, usarLugar, usarSinMateriales){
+  const rangos = filtroState.rango === 'actual' ? [rangoActual()] : [filtroState.rango];
+  const areas = filtroState.area === 'todas' ? AREAS : [filtroState.area];
+  const resultado = [];
+  rangos.forEach(r => {
+    areas.forEach(a => {
+      const act = DATA.actividades[r][a];
+      if(duracionModo === 'exacta' && filtroState.duracion !== 'todas' && String(act.duracion) !== String(filtroState.duracion)) return;
+      if(duracionModo === 'hasta' && filtroState.duracion !== 'todas' && act.duracion > parseInt(filtroState.duracion)) return;
+      // duracionModo === 'ninguna' no filtra por duración
+      if(usarLugar && filtroState.lugar !== 'todos' && !act.lugar.includes(filtroState.lugar)) return;
+      if(usarSinMateriales && filtroState.sinMateriales && !act.sin_materiales) return;
+      resultado.push({rango:r, area:a, act});
+    });
+  });
+  return resultado;
+}
+
+// Intenta con filtros exactos y, si no hay resultados, los relaja progresivamente
+// (duración -> lugar -> materiales) para nunca dejar la biblioteca vacía cuando
+// sí existe una actividad para esa edad y área.
+function actividadesFiltradas(){
+  let lista = actividadesConFiltro('exacta', true, true);
+  if(lista.length) return { lista, exacto: true };
+
+  lista = actividadesConFiltro('hasta', true, true);
+  if(lista.length) return { lista, exacto: true };
+
+  lista = actividadesConFiltro('hasta', false, true);
+  if(lista.length) return { lista, exacto: false };
+
+  lista = actividadesConFiltro('hasta', false, false);
+  if(lista.length) return { lista, exacto: false };
+
+  lista = actividadesConFiltro('ninguna', false, false);
+  return { lista, exacto: false };
+}
+
+function renderBibliotecaResultados(){
+  const { lista, exacto } = actividadesFiltradas();
+  const wrap = document.getElementById('biblioteca-resultados');
+  if(!lista.length){
+    wrap.innerHTML = `<div class="empty-state">Aún no tenemos una actividad para esa combinación exacta de etapa y área. Prueba con otra edad o área.</div>`;
+    return;
+  }
+  let html = '';
+  if(!exacto){
+    html += `<p class="section-sub no-print" style="margin-bottom:14px;">No hay una coincidencia exacta con esos filtros de tiempo o lugar, así que te mostramos la actividad más cercana para esta edad 👇</p>`;
+  }
+  html += lista.map(item => actividadCardHtml(item.rango, item.area, item.act, 'lib')).join('');
+  wrap.innerHTML = html;
+  attachActivityButtons();
+}
+
+function actividadCardHtml(rango, area, act, ctx){
+  const key = rango + '|' + area;
+  const hecha = !!(state.actividadesHechas[key] && state.actividadesHechas[key].hecho);
+  const guardada = !!state.actividadesGuardadas[key];
+  const chipsLugar = act.lugar.map(l => `<span class="badge badge-blue">${LUGAR_LABELS[l]||l}</span>`).join(' ');
+  return `
+    <div class="activity-full-card" data-key="${key}">
+      <div class="top-row">
+        <div class="icon-wrap">${ICONS[area]}</div>
+        <div>
+          <h3>${act.nombre}</h3>
+          <span class="badge badge-blue">${DATA.area_labels[area]}</span>
+          <span class="badge badge-green">${DATA.rango_labels[rango]}</span>
+        </div>
+      </div>
+      <div class="meta-tags">
+        <span class="badge badge-blue">⏱ ${act.duracion} min</span>
+        ${act.sin_materiales ? '<span class="badge badge-green">Sin comprar materiales</span>' : ''}
+        ${chipsLugar}
+      </div>
+      <p><b>Objetivo:</b> ${act.objetivo} <span style="color:var(--muted);">(${act.habilidad})</span></p>
+      <p class="field-label">Materiales</p>
+      <div class="chips-row">${act.materiales.map(m => `<span class="badge badge-blue">${m}</span>`).join('')}</div>
+      <p class="field-label">Cómo hacerla</p>
+      <ol>${act.instrucciones.map(p => `<li>${p}</li>`).join('')}</ol>
+      <p class="field-label">Nivel: ${act.dificultad === 'facil' ? 'Fácil' : 'Medio'}</p>
+      <p style="margin-bottom:4px;"><b>Más sencillo:</b> ${act.mas_facil}</p>
+      <p><b>Más desafiante:</b> ${act.mas_dificil}</p>
+      <div class="safety-note">🛡️ ${act.seguridad}</div>
+      <div class="action-row no-print">
+        <button class="action-toggle ${hecha ? 'on' : ''}" data-action="hecho" data-key="${key}">✓ Lo hicimos</button>
+        <button class="action-toggle ${guardada ? 'saved' : ''}" data-action="guardar" data-key="${key}">☆ Guardar</button>
+      </div>
+    </div>
+  `;
+}
+
+function attachActivityButtons(){
+  document.querySelectorAll('[data-action="hecho"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.key;
+      const actual = !!(state.actividadesHechas[key] && state.actividadesHechas[key].hecho);
+      state.actividadesHechas[key] = { hecho: !actual, fecha: new Date().toISOString().slice(0,10) };
+      saveState();
+      btn.classList.toggle('on', !actual);
+      btn.textContent = !actual ? '✓ ¡Hecho!' : '✓ Lo hicimos';
+    });
+  });
+  document.querySelectorAll('[data-action="guardar"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.key;
+      const actual = !!state.actividadesGuardadas[key];
+      if(actual) delete state.actividadesGuardadas[key]; else state.actividadesGuardadas[key] = true;
+      saveState();
+      btn.classList.toggle('saved', !actual);
+      btn.textContent = !actual ? '★ Guardado' : '☆ Guardar';
+    });
+  });
+}
+
+// ================= RENDER: ¿QUÉ HACEMOS AHORA? =================
+let ahoraFiltro = { tiempo: '10', lugar: 'casa', area: 'cualquiera', estado: 'curioso', sinMateriales: false };
+let ahoraExcluir = [];
+
+function renderAhora(){
+  const html = `
+    <p class="section-title">¿Qué hacemos ahora?</p>
+    <p class="section-sub">Cuéntame el momento y te sugiero algo a la medida.</p>
+
+    <div class="filters-panel">
+      <div class="filter-group">
+        <span class="filter-group-label">¿Cuánto tiempo tienes?</span>
+        <div class="chip-select" id="ah-tiempo">
+          <span class="chip-option" data-val="5">5 min</span>
+          <span class="chip-option" data-val="10">10 min</span>
+          <span class="chip-option" data-val="15">15 min</span>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-group-label">¿Dónde están?</span>
+        <div class="chip-select" id="ah-lugar">
+          <span class="chip-option" data-val="casa">En casa</span>
+          <span class="chip-option" data-val="aire_libre">Al aire libre</span>
+          <span class="chip-option" data-val="bano">En el baño</span>
+          <span class="chip-option" data-val="comida">En la comida</span>
+          <span class="chip-option" data-val="antes_dormir">Antes de dormir</span>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-group-label">¿Qué área quieres acompañar?</span>
+        <div class="chip-select" id="ah-area">
+          <span class="chip-option" data-val="cualquiera">Cualquiera</span>
+          ${AREAS.map(a => `<span class="chip-option" data-val="${a}">${DATA.area_labels[a]}</span>`).join('')}
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-group-label">¿Cómo está tu bebé ahora?</span>
+        <div class="chip-select" id="ah-estado">
+          <span class="chip-option" data-val="activo">Activo</span>
+          <span class="chip-option" data-val="tranquilo">Tranquilo</span>
+          <span class="chip-option" data-val="cansado">Cansado</span>
+          <span class="chip-option" data-val="curioso">Curioso</span>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="chip-option" id="ah-sin-materiales">Solo con lo que tengo en casa</span>
+      </div>
+      <div class="btn-row">
+        <button class="btn-solid" id="btn-buscar-actividad">Buscar actividad</button>
+      </div>
+    </div>
+
+    <div id="ahora-resultado"></div>
+  `;
+  document.getElementById('screen-ahora').innerHTML = html;
+
+  function setActive(wrapId, val){
+    document.querySelectorAll('#'+wrapId+' .chip-option').forEach(c => c.classList.toggle('selected', c.dataset.val === val));
+  }
+  setActive('ah-tiempo', ahoraFiltro.tiempo);
+  setActive('ah-lugar', ahoraFiltro.lugar);
+  setActive('ah-area', ahoraFiltro.area);
+  setActive('ah-estado', ahoraFiltro.estado);
+  document.getElementById('ah-sin-materiales').classList.toggle('selected', ahoraFiltro.sinMateriales);
+
+  ['ah-tiempo','ah-lugar','ah-area','ah-estado'].forEach(wrapId => {
+    document.querySelectorAll('#'+wrapId+' .chip-option').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const key = wrapId.replace('ah-','');
+        ahoraFiltro[key] = chip.dataset.val;
+        setActive(wrapId, chip.dataset.val);
+      });
+    });
+  });
+  document.getElementById('ah-sin-materiales').addEventListener('click', (e) => {
+    ahoraFiltro.sinMateriales = !ahoraFiltro.sinMateriales;
+    e.target.classList.toggle('selected', ahoraFiltro.sinMateriales);
+  });
+
+  document.getElementById('btn-buscar-actividad').addEventListener('click', () => {
+    ahoraExcluir = [];
+    buscarYMostrarActividad();
+  });
+}
+
+const ESTADO_AREA_PREFERIDA = { activo:'motriz_gruesa', tranquilo:'lenguaje', cansado:'sensorial', curioso:'cognitiva' };
+
+function buscarYMostrarActividad(){
+  const rango = rangoActual();
+  let candidatas = AREAS.filter(a => ahoraFiltro.area === 'cualquiera' ? true : a === ahoraFiltro.area);
+  candidatas = candidatas.filter(a => !ahoraExcluir.includes(a));
+
+  candidatas = candidatas.filter(a => {
+    const act = DATA.actividades[rango][a];
+    if(String(act.duracion) !== String(ahoraFiltro.tiempo)) return false;
+    if(!act.lugar.includes(ahoraFiltro.lugar)) return false;
+    if(ahoraFiltro.sinMateriales && !act.sin_materiales) return false;
+    return true;
+  });
+
+  let elegido = null;
+  const resultado = document.getElementById('ahora-resultado');
+
+  if(candidatas.length === 0){
+    // buscar la opción más cercana relajando duración y lugar
+    let cercanas = AREAS.filter(a => ahoraFiltro.area === 'cualquiera' ? true : a === ahoraFiltro.area);
+    cercanas = cercanas.filter(a => !ahoraExcluir.includes(a));
+    if(cercanas.length === 0) cercanas = AREAS;
+    const preferida = ESTADO_AREA_PREFERIDA[ahoraFiltro.estado];
+    elegido = cercanas.includes(preferida) ? preferida : cercanas[0];
+    resultado.innerHTML = `<p class="section-sub no-print" style="margin-top:16px;">No encontramos una coincidencia exacta, así que te dejamos la opción más cercana y segura para esta etapa 👇</p>`;
+  } else {
+    const preferida = ESTADO_AREA_PREFERIDA[ahoraFiltro.estado];
+    elegido = candidatas.includes(preferida) ? preferida : candidatas[Math.floor(Math.random()*candidatas.length)];
+    resultado.innerHTML = '';
+  }
+
+  ahoraExcluir.push(elegido);
+  const act = DATA.actividades[rango][elegido];
+  resultado.innerHTML += actividadCardHtml(rango, elegido, act, 'ahora') + `
+    <div class="btn-row no-print">
+      <button class="btn-outline" id="btn-otra-actividad">Ver otra opción</button>
+    </div>
+  `;
+  attachActivityButtons();
+  document.getElementById('btn-otra-actividad').addEventListener('click', buscarYMostrarActividad);
+}
+
+// ================= RENDER: HITOS =================
+let hitosRangoSeleccionado = null;
+
+function renderHitos(){
+  if(!hitosRangoSeleccionado) hitosRangoSeleccionado = rangoActual();
+  const rango = hitosRangoSeleccionado;
+
+  let html = `
+    <p class="section-title">Hitos de ${state.perfil.nombre}</p>
+    <p class="section-sub">Marca lo que observas. Esto no es una calificación ni un diagnóstico, solo un acompañamiento.</p>
+
+    <div class="filters-panel no-print">
+      <span class="filter-group-label">Etapa</span>
+      <div class="chip-select" id="hitos-rango-select">
+        ${RANGOS.map(r => `<span class="chip-option ${r===rango?'selected':''}" data-val="${r}">${DATA.rango_labels[r]}</span>`).join('')}
+      </div>
+    </div>
+  `;
+
+  AREAS_HITOS.forEach(area => {
+    const lista = DATA.hitos[rango][area];
+    const total = lista.length;
+    let logrados = 0;
+    lista.forEach((_, i) => {
+      const est = (state.hitosEstado[rango+'|'+area+'|'+i]||{}).estado;
+      if(est === 'frecuente') logrados++;
+    });
+    const pct = Math.round((logrados/total)*100);
+
+    html += `<p class="field-label" style="font-size:12px; margin-top:22px;">${DATA.area_labels[area]}</p>`;
+    html += `<div class="area-progress-row"><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct}%"></div></div><div class="progress-label">${logrados}/${total}</div></div>`;
+
+    lista.forEach((texto, i) => {
+      const key = rango+'|'+area+'|'+i;
+      const registro = state.hitosEstado[key] || {estado:'pendiente', fecha:'', nota:''};
+      const ejemplo = (DATA.hitos_ejemplo[rango]||{})[area] || '';
+      const actividadRelacionada = DATA.actividades[rango][area];
+      html += `
+        <div class="hito-item">
+          <p class="hito-texto">${texto}</p>
+          ${i===0 && ejemplo ? `<p class="hito-ejemplo">Ejemplo: ${ejemplo}</p>` : ''}
+          <div class="estado-row" data-key="${key}">
+            <button class="estado-btn ${registro.estado==='pendiente'?'sel-pendiente':''}" data-estado="pendiente">Todavía no</button>
+            <button class="estado-btn ${registro.estado==='comenzando'?'sel-comenzando':''}" data-estado="comenzando">Comenzando</button>
+            <button class="estado-btn ${registro.estado==='frecuente'?'sel-frecuente':''}" data-estado="frecuente">Con frecuencia</button>
+            <button class="estado-btn ${registro.estado==='comentar'?'sel-comentar':''}" data-estado="comentar">Comentar con pediatra</button>
+          </div>
+          <div class="hito-extra">
+            <input type="date" class="hito-fecha" data-key="${key}" value="${registro.fecha||''}" placeholder="Fecha observada">
+          </div>
+          <div class="hito-extra">
+            <textarea class="hito-nota" data-key="${key}" placeholder="Nota opcional...">${registro.nota||''}</textarea>
+          </div>
+          <p class="section-sub" style="margin:8px 0 0;">Actividad relacionada: <b>${actividadRelacionada.nombre}</b> (${DATA.area_labels[area]})</p>
+        </div>
+      `;
+    });
+  });
+
+  document.getElementById('screen-hitos').innerHTML = html;
+
+  document.querySelectorAll('#hitos-rango-select .chip-option').forEach(chip => {
+    chip.addEventListener('click', () => {
+      hitosRangoSeleccionado = chip.dataset.val;
+      renderHitos();
+    });
+  });
+
+  document.querySelectorAll('.estado-row').forEach(row => {
+    row.querySelectorAll('.estado-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = row.dataset.key;
+        if(!state.hitosEstado[key]) state.hitosEstado[key] = {estado:'pendiente', fecha:'', nota:''};
+        state.hitosEstado[key].estado = btn.dataset.estado;
+        saveState();
+        renderHitos();
+      });
+    });
+  });
+
+  document.querySelectorAll('.hito-fecha').forEach(inp => {
+    inp.addEventListener('change', () => {
+      const key = inp.dataset.key;
+      if(!state.hitosEstado[key]) state.hitosEstado[key] = {estado:'pendiente', fecha:'', nota:''};
+      state.hitosEstado[key].fecha = inp.value;
+      saveState();
+    });
+  });
+  document.querySelectorAll('.hito-nota').forEach(ta => {
+    ta.addEventListener('change', () => {
+      const key = ta.dataset.key;
+      if(!state.hitosEstado[key]) state.hitosEstado[key] = {estado:'pendiente', fecha:'', nota:''};
+      state.hitosEstado[key].nota = ta.value;
+      saveState();
+    });
+  });
+}
+
+// ================= RENDER: LOGROS =================
+const LOGROS_EJEMPLO = ["Primera sonrisa social","Se sentó sin apoyo","Comenzó a gatear","Dio sus primeros pasos","Dijo su primera palabra","Señaló para pedir algo"];
+
+let logroFotoTmp = null;
+
+function renderLogros(){
+  let html = `
+    <p class="section-title">Sus pequeños grandes logros</p>
+    <p class="section-sub">Guarda los momentos que quieres recordar siempre.</p>
+
+    <div class="card no-print">
+      <div class="field">
+        <label for="lg-nombre">Nombre del logro</label>
+        <input type="text" id="lg-nombre" list="lg-sugerencias" placeholder="Ej. Dio sus primeros pasos">
+        <datalist id="lg-sugerencias">
+          ${LOGROS_EJEMPLO.map(e => `<option value="${e}">`).join('')}
+        </datalist>
+      </div>
+      <div class="field">
+        <label for="lg-fecha">Fecha</label>
+        <input type="date" id="lg-fecha" value="${new Date().toISOString().slice(0,10)}">
+      </div>
+      <div class="field">
+        <label for="lg-area">Área relacionada</label>
+        <select id="lg-area">
+          ${AREAS.map(a => `<option value="${a}">${DATA.area_labels[a]}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field">
+        <label for="lg-foto">Foto (opcional)</label>
+        <input type="file" id="lg-foto" accept="image/*">
+        <div id="lg-foto-preview" class="foto-preview"></div>
+      </div>
+      <div class="field">
+        <label for="lg-nota">Nota o recuerdo</label>
+        <textarea id="lg-nota" placeholder="Cuéntanos cómo fue ese momento..."></textarea>
+      </div>
+      <div class="btn-row">
+        <button class="btn-solid" id="btn-guardar-logro">Guardar logro</button>
+      </div>
+    </div>
+
+    <div id="logros-lista"></div>
+    <canvas id="logro-canvas" width="600" height="400" style="display:none;"></canvas>
+  `;
+  document.getElementById('screen-logros').innerHTML = html;
+
+  document.getElementById('lg-foto').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      logroFotoTmp = ev.target.result;
+      document.getElementById('lg-foto-preview').innerHTML = `<img src="${logroFotoTmp}">`;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('btn-guardar-logro').addEventListener('click', () => {
+    const nombre = document.getElementById('lg-nombre').value.trim();
+    if(!nombre){ alert('Ponle un nombre al logro para guardarlo.'); return; }
+    state.logros.push({
+      id: Date.now(),
+      nombre,
+      fecha: document.getElementById('lg-fecha').value,
+      area: document.getElementById('lg-area').value,
+      foto: logroFotoTmp,
+      nota: document.getElementById('lg-nota').value.trim()
+    });
+    saveState();
+    logroFotoTmp = null;
+    renderLogros();
+  });
+
+  renderListaLogros();
+}
+
+function renderListaLogros(){
+  const wrap = document.getElementById('logros-lista');
+  if(!state.logros.length){
+    wrap.innerHTML = `<div class="empty-state">Aún no has registrado logros. ¡El primero está por venir! 🌱</div>`;
+    return;
+  }
+  const ordenados = [...state.logros].sort((a,b) => (b.fecha||'').localeCompare(a.fecha||''));
+  wrap.innerHTML = ordenados.map(l => `
+    <div class="logro-card">
+      ${l.foto ? `<img class="logro-photo" src="${l.foto}">` : `<div class="logro-photo"></div>`}
+      <div class="logro-info">
+        <b>${l.nombre}</b>
+        <span class="logro-fecha">${formatearFecha(l.fecha)} · ${DATA.area_labels[l.area]}</span>
+        ${l.nota ? `<p>${l.nota}</p>` : ''}
+        <button class="btn-ghost no-print" data-logro-id="${l.id}">Descargar tarjeta</button>
+      </div>
+    </div>
+  `).join('');
+
+  wrap.querySelectorAll('[data-logro-id]').forEach(btn => {
+    btn.addEventListener('click', () => descargarTarjetaLogro(parseInt(btn.dataset.logroId)));
+  });
+}
+
+function descargarTarjetaLogro(id){
+  const logro = state.logros.find(l => l.id === id);
+  if(!logro) return;
+  const canvas = document.getElementById('logro-canvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  ctx.fillStyle = '#FAF6EE';
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = '#8CA1DA';
+  ctx.fillRect(0,0,W,14);
+
+  function drawContent(){
+    ctx.fillStyle = '#5E6FA3';
+    ctx.font = '700 16px Arial';
+    ctx.fillText('MAMI A MIL STORE', 40, 50);
+
+    ctx.fillStyle = '#3B4468';
+    ctx.font = '700 30px Arial';
+    wrapText(ctx, logro.nombre, 40, 110, W-80, 36);
+
+    ctx.fillStyle = '#8189A8';
+    ctx.font = '15px Arial';
+    ctx.fillText((state.perfil.nombre + ' · ' + formatearFecha(logro.fecha)), 40, H-100);
+
+    if(logro.nota){
+      ctx.fillStyle = '#3B4468';
+      ctx.font = 'italic 14px Arial';
+      wrapText(ctx, '"' + logro.nota + '"', 40, H-60, W-80, 20);
+    }
+
+    const link = document.createElement('a');
+    link.download = 'logro-' + logro.nombre.replace(/\s+/g,'-').toLowerCase() + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  if(logro.foto){
+    const img = new Image();
+    img.onload = () => {
+      ctx.drawImage(img, W-190, 40, 150, 150);
+      drawContent();
+    };
+    img.src = logro.foto;
+  } else {
+    drawContent();
+  }
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+  const words = text.split(' ');
+  let line = '';
+  let curY = y;
+  for(let n=0;n<words.length;n++){
+    const testLine = line + words[n] + ' ';
+    if(ctx.measureText(testLine).width > maxWidth && n > 0){
+      ctx.fillText(line, x, curY);
+      line = words[n] + ' ';
+      curY += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line, x, curY);
+}
+
+// ================= RENDER: RESUMEN =================
+function renderResumen(){
+  const p = state.perfil;
+  const cron = edadCronologicaMeses(p);
+  const corr = edadCorregidaMeses(p);
+  const rango = rangoActual();
+
+  const comentar = [], comenzando = [], frecuente = [];
+  Object.keys(state.hitosEstado).forEach(key => {
+    const [r, area, idx] = key.split('|');
+    const texto = DATA.hitos[r][area][parseInt(idx)];
+    const est = state.hitosEstado[key].estado;
+    if(est === 'comentar') comentar.push(texto);
+    if(est === 'comenzando') comenzando.push(texto);
+    if(est === 'frecuente') frecuente.push(texto);
+  });
+
+  const hechas = Object.keys(state.actividadesHechas).filter(k => state.actividadesHechas[k].hecho);
+  const favoritas = Object.keys(state.actividadesGuardadas);
+
+  function nombreActividad(key){
+    const [r,a] = key.split('|');
+    return DATA.actividades[r][a].nombre + ' (' + DATA.area_labels[a] + ')';
+  }
+
+  const html = `
+    <p class="section-title">Resumen del desarrollo</p>
+    <p class="section-sub">Un documento informativo para compartir o llevar a la consulta. No sustituye una evaluación profesional.</p>
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Datos de ${p.nombre}</p>
+      <p style="font-size:14px; margin:0 0 4px;">Edad cronológica: <b>${edadTexto(cron)}</b></p>
+      ${corr !== null ? `<p style="font-size:14px; margin:0 0 4px;">Edad corregida: <b>${edadTexto(corr)}</b></p>` : ''}
+      <p style="font-size:14px; margin:0;">Etapa actual: <b>${DATA.rango_labels[rango]}</b></p>
+    </div>
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Hitos con frecuencia (${frecuente.length})</p>
+      ${frecuente.length ? `<ul>${frecuente.map(h=>`<li>${h}</li>`).join('')}</ul>` : `<p class="section-sub" style="margin:0;">Aún ninguno marcado.</p>`}
+      <p class="field-label">Comenzando (${comenzando.length})</p>
+      ${comenzando.length ? `<ul>${comenzando.map(h=>`<li>${h}</li>`).join('')}</ul>` : `<p class="section-sub" style="margin:0;">Aún ninguno marcado.</p>`}
+      <p class="field-label">Para comentar con el pediatra (${comentar.length})</p>
+      ${comentar.length ? `<ul>${comentar.map(h=>`<li>${h}</li>`).join('')}</ul>` : `<p class="section-sub" style="margin:0;">Ninguno por ahora.</p>`}
+    </div>
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Actividades realizadas (${hechas.length})</p>
+      ${hechas.length ? `<ul>${hechas.map(k=>`<li>${nombreActividad(k)}</li>`).join('')}</ul>` : `<p class="section-sub" style="margin:0;">Aún ninguna registrada.</p>`}
+      <p class="field-label">Actividades favoritas (${favoritas.length})</p>
+      ${favoritas.length ? `<ul>${favoritas.map(k=>`<li>${nombreActividad(k)}</li>`).join('')}</ul>` : `<p class="section-sub" style="margin:0;">Aún ninguna guardada.</p>`}
+    </div>
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Logros registrados (${state.logros.length})</p>
+      ${state.logros.length ? `<ul>${state.logros.map(l=>`<li>${l.nombre} — ${formatearFecha(l.fecha)}</li>`).join('')}</ul>` : `<p class="section-sub" style="margin:0;">Aún ninguno.</p>`}
+    </div>
+
+    <div class="card no-print">
+      <label for="rs-notas">Notas de la familia</label>
+      <textarea id="rs-notas" placeholder="Cualquier observación que quieran recordar...">${state.resumenNotas||''}</textarea>
+      <label for="rs-preguntas" style="margin-top:14px;">Preguntas para la próxima consulta pediátrica</label>
+      <textarea id="rs-preguntas" placeholder="Ej. ¿Es normal que...?">${state.preguntasConsulta||''}</textarea>
+    </div>
+
+    <div class="card" id="rs-notas-print" style="display:none;">
+      ${state.resumenNotas ? `<p class="field-label" style="margin-top:0;">Notas de la familia</p><p>${state.resumenNotas}</p>` : ''}
+      ${state.preguntasConsulta ? `<p class="field-label">Preguntas para el pediatra</p><p>${state.preguntasConsulta}</p>` : ''}
+    </div>
+
+    <div class="disclaimer-box">
+      Este documento es informativo y no sustituye una evaluación profesional. Compártelo con el pediatra de ${p.nombre} si te ayuda a organizar la conversación.
+    </div>
+
+    <div class="btn-row no-print">
+      <button class="btn-solid" id="btn-imprimir-resumen">Imprimir / Descargar PDF</button>
+      <button class="btn-outline" id="btn-compartir-resumen">Compartir</button>
+      <button class="btn-outline" id="btn-guardar-resumen">Guardar notas</button>
+    </div>
+  `;
+  document.getElementById('screen-resumen').innerHTML = html;
+
+  document.getElementById('btn-guardar-resumen').addEventListener('click', () => {
+    state.resumenNotas = document.getElementById('rs-notas').value;
+    state.preguntasConsulta = document.getElementById('rs-preguntas').value;
+    saveState();
+    const btn = document.getElementById('btn-guardar-resumen');
+    btn.textContent = 'Guardado ✓';
+    setTimeout(()=> btn.textContent = 'Guardar notas', 1800);
+  });
+
+  document.getElementById('btn-imprimir-resumen').addEventListener('click', () => {
+    state.resumenNotas = document.getElementById('rs-notas').value;
+    state.preguntasConsulta = document.getElementById('rs-preguntas').value;
+    saveState();
+    document.getElementById('rs-notas-print').style.display = 'block';
+    window.print();
+    setTimeout(()=>{ document.getElementById('rs-notas-print').style.display = 'none'; }, 500);
+  });
+
+  document.getElementById('btn-compartir-resumen').addEventListener('click', async () => {
+    const texto = `Resumen del desarrollo de ${p.nombre} (${edadTexto(cron)}) — generado con la app de Mami a mil Store.`;
+    if(navigator.share){
+      try{ await navigator.share({title:'Resumen del desarrollo', text:texto}); }catch(e){}
+    } else {
+      try{
+        await navigator.clipboard.writeText(texto);
+        alert('Copiado. Puedes pegarlo donde quieras compartirlo.');
+      }catch(e){
+        alert('No se pudo copiar automáticamente. Puedes tomar una captura de pantalla del resumen.');
+      }
+    }
+  });
+}
+
+// ================= RENDER: CUÁNDO CONSULTAR =================
+function renderConsulta(){
+  const comentarCount = Object.values(state.hitosEstado).filter(h => h.estado === 'comentar').length;
+  const html = `
+    <p class="section-title">Cuándo consultar</p>
+    <p class="section-sub">Información orientativa, sin alarmismo, para acompañarte a decidir.</p>
+
+    ${comentarCount > 0 ? `
+      <div class="card" style="background:var(--alert-bg); border-color:#E8C3B8;">
+        <p style="margin:0 0 10px; font-size:14.5px;"><b>Tienes ${comentarCount} hito${comentarCount>1?'s':''} marcado${comentarCount>1?'s':''} como "quiero comentarlo"</b>. Esto no significa un diagnóstico — es información útil para tu próxima consulta.</p>
+        <button class="btn-solid no-print" onclick="irATab('resumen')">Ver resumen para la consulta</button>
+      </div>
+    ` : ''}
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Coméntalo en el próximo control si...</p>
+      <p>Notas algo distinto en tu bebé, pero no te genera urgencia — por ejemplo, que prefiere mucho un lado del cuerpo, o que un hito tarda un poco más de lo esperado dentro de un rango amplio.</p>
+    </div>
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Pide orientación más pronto si...</p>
+      <p>Tu bebé <b>pierde una habilidad que ya tenía</b> (por ejemplo, dejó de sostener la cabeza o de balbucear como antes), o si tu instinto te dice que algo no está bien, aunque no sepas explicarlo del todo. Confía en esa señal.</p>
+    </div>
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Qué registrar antes de la consulta</p>
+      <ul>
+        <li>Qué observaste, y desde cuándo</li>
+        <li>Si el bebé nació prematuro, su edad corregida</li>
+        <li>Hitos marcados como "comenzando" o "quiero comentarlo" en esta app</li>
+        <li>Cualquier cambio reciente en sueño, alimentación o comportamiento</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="field-label" style="margin-top:0;">Preguntas que puedes llevar</p>
+      <ul>
+        <li>¿Esto que observo está dentro de lo esperado para su edad?</li>
+        <li>¿Hay algo que podamos hacer en casa para acompañarlo mejor?</li>
+        <li>¿Cuándo deberíamos volver a revisarlo si seguimos con dudas?</li>
+      </ul>
+    </div>
+
+    <div class="disclaimer-box">
+      Este registro no permite diagnosticar condiciones del desarrollo. Si algo te preocupa, compártelo con el pediatra o profesional que acompaña a ${state.perfil.nombre}.
+    </div>
+  `;
+  document.getElementById('screen-consulta').innerHTML = html;
+}
+
+// ================= RENDER: RUTINAS =================
+const RUTINAS = [
+  {momento:'Al despertar', tipo:'vínculo', texto:'Antes de levantarlo, salúdalo con calma y una sonrisa. Nárrale lo que van a hacer: "buenos días, vamos a cambiarte y desayunar". Ese ratito de conexión antes de empezar el ajetreo del día vale mucho más que cualquier ejercicio.'},
+  {momento:'Durante el cambio de pañal', tipo:'estimulación suave', texto:'Mientras cambias su pañal, nombra suavemente las partes de su cuerpo que vas tocando: "aquí están tus piecitos, aquí tu pancita". Es un momento perfecto para el lenguaje, sin que se sienta forzado.'},
+  {momento:'Durante la comida', tipo:'vínculo y sensorial', texto:'Deja que explore texturas de comida con las manos cuando ya coma sólidos, aunque ensucie. Nombra los alimentos y colores. No conviertas cada comida en una lección, disfrútenla juntos.'},
+  {momento:'Durante el baño', tipo:'sensorial', texto:'El agua es puro estímulo sensorial: deja que salpique, que sienta la temperatura, que juegue con un vasito. Cántale mientras lo bañas, es un momento ideal para el vínculo.'},
+  {momento:'En un paseo', tipo:'motriz y lenguaje', texto:'Nombra lo que ven: un perro, un árbol, un carro. Si ya camina, deja que explore superficies distintas (pasto, banqueta) siempre con supervisión. No hace falta llevar juguetes, el entorno ya estimula.'},
+  {momento:'Antes de dormir', tipo:'vínculo', texto:'Un cuento corto, una canción de cuna o simplemente unos minutos de brazos tranquilos. Este no es momento de estimulación activa, sino de calma y conexión antes de dormir.'}
+];
+
+function renderRutinas(){
+  const html = `
+    <p class="section-title">Rutinas de conexión</p>
+    <p class="section-sub">Pequeños momentos del día a día que también acompañan su desarrollo, sin que todo sea "ejercicio".</p>
+    ${RUTINAS.map(r => `
+      <div class="card">
+        <span class="badge badge-blue">${r.momento}</span>
+        <p style="font-size:14.5px; line-height:1.55; margin:10px 0 0;">${r.texto}</p>
+      </div>
+    `).join('')}
+    <div class="disclaimer-box">
+      No todo tiene que ser una actividad estructurada. El juego libre, el vínculo y el disfrute compartido son, en sí mismos, parte fundamental del desarrollo de ${state.perfil ? state.perfil.nombre : 'tu bebé'}.
+    </div>
+  `;
+  document.getElementById('screen-rutinas').innerHTML = html;
+}
+
+// ================= RENDER ALL =================
+function renderAll(){
+  renderInicio();
+  renderBiblioteca();
+  renderAhora();
+  renderHitos();
+  renderLogros();
+  renderResumen();
+  renderConsulta();
+  renderRutinas();
+}
+
+// ================= INIT =================
+(function init(){
+  state = loadState();
+  if(state.perfil && state.perfil.nombre && state.perfil.nacimiento){
+    onboarding.style.display = 'none';
+    appMain.style.display = 'block';
+    renderAll();
+  } else {
+    abrirOnboarding(false);
+  }
+})();
+
+</script>
+</body>
+</html>
