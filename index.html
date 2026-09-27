@@ -28,32 +28,12 @@
 
   html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
 
-  body{ <style>
-  body.mbc-locked > *:not(#mbc-gate) { display: none !important; }
-  #mbc-gate {
-    position: fixed; inset: 0; background: #FAF6EE;
-    display: flex; align-items: center; justify-content: center; z-index: 9999;
-  }
-  #mbc-gate form {
-    background: #fff; padding: 2rem; border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 90%; max-width: 320px;
-    display: flex; flex-direction: column; gap: 0.75rem; font-family: sans-serif;
-  }
-  #mbc-gate input {
-    padding: 0.75rem; border-radius: 8px; border: 1px solid #ddd; font-size: 1rem;
-  }
-  #mbc-gate button {
-    padding: 0.75rem; border-radius: 8px; border: none; background: #3B4468;
-    color: #fff; font-weight: 600; cursor: pointer;
-  }
-  #mbc-gate p.mbc-error { color: #C4472F; margin: 0; font-size: 0.85rem; }
-</style>
+  body{
 
-<div id="mbc-gate">
-  <form id="mbc-gate-form">
+
+
     <h2 style="margin:0;">Acceso restringido</h2>
-    <input type="password" id="mbc-gate-input" placeholder="Contraseña" autofocus>
-    <p class="mbc-error" id="mbc-gate-error" style="display:none;"></p>
+    
     <button type="submit">Entrar</button>
   </form>
 </div>
@@ -67,19 +47,16 @@
 
     document.body.classList.add("mbc-locked");
 
-    document.getElementById("mbc-gate-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const valor = document.getElementById("mbc-gate-input").value;
-      const errorEl = document.getElementById("mbc-gate-error");
+    
 
       if (valor === CLAVE) {
         localStorage.setItem(KEY, "true");
         document.body.classList.remove("mbc-locked");
-        document.getElementById("mbc-gate").remove();
+        
       } else {
         errorEl.textContent = "Contraseña incorrecta. Inténtalo de nuevo.";
         errorEl.style.display = "block";
-        document.getElementById("mbc-gate-input").value = "";
+        
       }
     });
   })();
