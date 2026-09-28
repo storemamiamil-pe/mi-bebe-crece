@@ -444,6 +444,39 @@
     <button type="submit">Entrar</button>
   </form>
 </div>
+<script>
+  (function () {
+    const CLAVE = "bebe";
+    const KEY = "mbc_access_granted";
+    const gate = document.getElementById("mbc-gate");
+
+    let granted = false;
+    try { granted = localStorage.getItem(KEY) === "true"; } catch (e) {}
+
+    if (granted) {
+      gate.remove();
+      return;
+    }
+
+    document.body.classList.add("mbc-locked");
+
+    document.getElementById("mbc-gate-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const input = document.getElementById("mbc-gate-input");
+      const errorEl = document.getElementById("mbc-gate-error");
+
+      if (input.value === CLAVE) {
+        try { localStorage.setItem(KEY, "true"); } catch (e) {}
+        document.body.classList.remove("mbc-locked");
+        gate.remove();
+      } else {
+        errorEl.textContent = "Contraseña incorrecta. Inténtalo de nuevo.";
+        errorEl.style.display = "block";
+        input.value = "";
+      }
+    });
+  })();
+</script>
 
 <!-- ============ MODAL: CREAR / EDITAR PERFIL ============ -->
 <div id="onboarding" class="onboarding-overlay">
@@ -1725,32 +1758,6 @@ function renderAll(){
   }
 })();
 
-</script>
-<script>
-  (function () {
-    const CLAVE = "bebe";
-    const KEY = "mbc_access_granted";
-
-    if (localStorage.getItem(KEY) === "true") return;
-
-    document.body.classList.add("mbc-locked");
-
-    document.getElementById("mbc-gate-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const valor = document.getElementById("mbc-gate-input").value;
-      const errorEl = document.getElementById("mbc-gate-error");
-
-      if (valor === CLAVE) {
-        localStorage.setItem(KEY, "true");
-        document.body.classList.remove("mbc-locked");
-        document.getElementById("mbc-gate").remove();
-      } else {
-        errorEl.textContent = "Contraseña incorrecta. Inténtalo de nuevo.";
-        errorEl.style.display = "block";
-        document.getElementById("mbc-gate-input").value = "";
-      }
-    });
-  })();
 </script>
 </body>
 </html>
